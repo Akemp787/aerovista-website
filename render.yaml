@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: aerovista-analytics
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PUBLIC_SITE_URL
+        value: https://aerovistaanalytics.com
+      - key: PUBLIC_CONTACT_EMAIL
+        value: hello@aerovistaanalytics.com
+      - key: OWNER_EMAIL
+        value: kempa@aerovistaanalytics.com
+      - key: CSRF_SECRET
+        generateValue: true
