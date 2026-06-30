@@ -465,6 +465,40 @@ svg {
   font-weight: 900;
 }
 
+.industries {
+  padding-top: 54px;
+  padding-bottom: 54px;
+  background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) 1.28fr;
+  gap: 54px;
+  align-items: center;
+}
+
+.industry-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.industry-list span {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  padding: 13px 16px;
+  color: #132542;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .impact {
   padding-top: 52px;
   padding-bottom: 52px;
@@ -624,6 +658,57 @@ svg {
   color: var(--blue);
   content: ">";
   font-weight: 900;
+}
+
+.process-preview {
+  background: #ffffff;
+}
+
+.process-preview-grid {
+  display: grid;
+  gap: 30px;
+}
+
+.process-preview .section-heading {
+  max-width: 700px;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.process-steps article {
+  min-height: 190px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+}
+
+.process-steps span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.process-steps h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.process-steps p {
+  margin: 0;
+  color: #1c2b43;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .about {
@@ -1314,8 +1399,14 @@ svg {
   .about-grid,
   .request-grid,
   .detail-grid,
-  .plan-grid {
+  .plan-grid,
+  .industries-grid {
     grid-template-columns: 1fr;
+  }
+
+  .industry-list,
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .plan-card {
@@ -1338,7 +1429,7 @@ svg {
 
 @media (max-width: 700px) {
   .container {
-    width: calc(100% - 32px);
+    width: calc(100% - 40px);
   }
 
   .site-header,
@@ -1379,6 +1470,14 @@ svg {
     width: 100%;
   }
 
+  .hero-copy,
+  .trust-item,
+  .service-card,
+  .industry-list span,
+  .process-steps article {
+    overflow-wrap: break-word;
+  }
+
   .hero h1 {
     max-width: 100%;
     font-size: 28px;
@@ -1391,6 +1490,8 @@ svg {
 
   .hero-actions .btn {
     width: 100%;
+    white-space: normal;
+    text-align: center;
   }
 
   .section-heading h2 {
@@ -1404,6 +1505,8 @@ svg {
   .case-card,
   .metric-row,
   .credential-row,
+  .industry-list,
+  .process-steps,
   .form-intent,
   .form-row,
   .process-list article,
@@ -1486,7 +1589,7 @@ svg {
 
 @media (max-width: 420px) {
   .container {
-    width: calc(100% - 32px);
+    width: calc(100% - 40px);
   }
 
   .hero h1 {
