@@ -38,6 +38,17 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 body {
   margin: 0;
   color: var(--ink);
@@ -53,9 +64,38 @@ a {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(0, 101, 232, 0.42);
+  outline-offset: 3px;
+}
+
 img,
 svg {
   display: block;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 14px;
+  color: #ffffff;
+  background: var(--ink);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 900;
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 .container {
@@ -127,6 +167,11 @@ svg {
 }
 
 .site-nav a:is(:hover, .active)::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.site-nav a:focus-visible::after {
   opacity: 1;
   transform: scaleX(1);
 }
@@ -796,6 +841,11 @@ svg {
   color: #ffffff;
   background: var(--blue);
   border-color: var(--blue);
+}
+
+.form-intent input:focus-visible + span {
+  outline: 3px solid rgba(0, 101, 232, 0.42);
+  outline-offset: 3px;
 }
 
 .form-row {

@@ -5,6 +5,7 @@ Professional consulting website with a small Node.js backend for secure inquiry 
 ## Run Locally
 
 ```powershell
+$env:PUBLIC_SITE_URL="http://localhost:3000"
 node server.js
 ```
 
@@ -13,6 +14,8 @@ Then open:
 ```text
 http://localhost:3000
 ```
+
+Set `PUBLIC_SITE_URL` to the local HTTP URL while testing locally. In production it should remain `https://aerovistaanalytics.com` so the CSRF cookie is marked `Secure`.
 
 ## Backend Features
 
@@ -27,7 +30,7 @@ http://localhost:3000
 - Stores successfully delivered inquiries privately in `storage/inquiries.jsonl`.
 - Logs email delivery errors server-side without returning provider details to visitors.
 
-The `storage` folder is blocked from public web access by `server.js`.
+The `storage` folder is blocked from public web access by `server.js`. On Render's free web service filesystem, this file should be treated as a temporary operational log rather than permanent storage; the delivered email is the primary inquiry record unless durable storage is added later.
 
 ## Environment Variables
 
@@ -84,6 +87,10 @@ CSRF_SECRET=<long random string>
 7. Submit a test inquiry on the live contact form. The page should show success only after Resend confirms the email was accepted.
 
 If Resend rejects the message or the API key is missing, the visitor sees a generic error asking them to email `contact@aerovistaanalytics.com` directly, while the server logs a sanitized delivery error.
+
+### SEO and Launch Files
+
+The site includes `robots.txt`, `sitemap.xml`, `site.webmanifest`, social sharing metadata, and a favicon. If a page is renamed or removed, update `sitemap.xml` and the page's canonical URL at the same time.
 
 ## Editing Later
 

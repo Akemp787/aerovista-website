@@ -1,0 +1,16 @@
+{
+  "name": "AeroVista Analytics",
+  "short_name": "AeroVista",
+  "description": "Data analytics consulting, reporting automation, business intelligence, and data migration support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#071936",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

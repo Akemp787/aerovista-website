@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AeroVista Analytics">
+  <rect width="64" height="64" rx="10" fill="#071936"/>
+  <path d="M31.7 10 12 54h10.6l4-9.8h18.2l4 9.8H60L39.7 10h-8zm-1.2 24.5 5.2-12.6 5.3 12.6H30.5z" fill="#ffffff"/>
+  <path d="M8 42c13.8-8.9 28.5-15.4 48-19.5-16.7 7.2-30.2 15.4-40.2 25.2L8 42z" fill="#6fa8d8"/>
+</svg>

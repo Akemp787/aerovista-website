@@ -45,6 +45,9 @@ const mimeTypes = {
   ".jpeg": "image/jpeg",
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
+  ".webmanifest": "application/manifest+json; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
 };
 
 fs.mkdirSync(STORAGE_DIR, { recursive: true });
@@ -61,7 +64,7 @@ function securityHeaders(contentType = "text/plain; charset=utf-8") {
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
     "Content-Security-Policy": [
       "default-src 'self'",
-      "script-src 'self'",
+      "script-src 'self' 'sha256-p8b2rlfkYEzm7GJpZeJD5Uaxu/adbiI41l+4YMQIf/E='",
       "style-src 'self'",
       "img-src 'self' data:",
       "font-src 'self'",
@@ -75,7 +78,10 @@ function securityHeaders(contentType = "text/plain; charset=utf-8") {
 }
 
 function sendJson(res, status, payload) {
-  res.writeHead(status, securityHeaders("application/json; charset=utf-8"));
+  res.writeHead(status, {
+    ...securityHeaders("application/json; charset=utf-8"),
+    "Cache-Control": "no-store",
+  });
   res.end(JSON.stringify(payload));
 }
 
@@ -411,7 +417,17 @@ function serveStatic(req, res, pathname) {
     }
 
     const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, securityHeaders(mimeTypes[ext] || "application/octet-stream"));
+    const headers = securityHeaders(mimeTypes[ext] || "application/octet-stream");
+    if ([".css", ".js"].includes(ext)) {
+      headers["Cache-Control"] = "public, max-age=3600";
+    } else if ([".png", ".jpg", ".jpeg", ".svg", ".ico", ".webmanifest"].includes(ext)) {
+      headers["Cache-Control"] = "public, max-age=86400";
+    } else if ([".html", ".xml", ".txt"].includes(ext)) {
+      headers["Cache-Control"] = "public, max-age=300";
+    } else {
+      headers["Cache-Control"] = "no-store";
+    }
+    res.writeHead(200, headers);
     res.end(data);
   });
 }
