@@ -10,7 +10,13 @@ services:
         value: https://aerovistaanalytics.com
       - key: PUBLIC_CONTACT_EMAIL
         value: contact@aerovistaanalytics.com
+      - key: CONTACT_TO_EMAIL
+        value: contact@aerovistaanalytics.com
+      - key: CONTACT_FROM_EMAIL
+        value: "AeroVista Analytics <contact@aerovistaanalytics.com>"
       - key: OWNER_EMAIL
         value: kempa@aerovistaanalytics.com
+      - key: RESEND_API_KEY
+        sync: false
       - key: CSRF_SECRET
         generateValue: true

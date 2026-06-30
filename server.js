@@ -9,6 +9,9 @@ const { URL } = require("node:url");
 const PORT = Number(process.env.PORT || 3000);
 const PUBLIC_SITE_URL = process.env.PUBLIC_SITE_URL || "https://aerovistaanalytics.com";
 const PUBLIC_CONTACT_EMAIL = process.env.PUBLIC_CONTACT_EMAIL || "contact@aerovistaanalytics.com";
+const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || "contact@aerovistaanalytics.com";
+const CONTACT_FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "AeroVista Analytics <contact@aerovistaanalytics.com>";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const ROOT = __dirname;
 const STORAGE_DIR = path.join(ROOT, "storage");
 const INQUIRY_FILE = path.join(STORAGE_DIR, "inquiries.jsonl");
@@ -17,6 +20,7 @@ const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT = 6;
 const csrfSecret = process.env.CSRF_SECRET || crypto.randomBytes(32).toString("hex");
 const requestCounts = new Map();
+const csrfCookieSecure = PUBLIC_SITE_URL.startsWith("https://") ? "; Secure" : "";
 
 const allowedServices = new Set([
   "Data Analysis & Reporting",
@@ -27,6 +31,9 @@ const allowedServices = new Set([
   "Analytics Strategy & Advisory",
   "Not sure yet",
 ]);
+
+const allowedTimelines = new Set(["Flexible", "ASAP", "2-4 weeks", "1-3 months", "3+ months"]);
+const allowedBudgets = new Set(["Not sure yet", "Under $2,500", "$2,500-$5,000", "$5,000-$10,000", "$10,000+"]);
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -171,9 +178,141 @@ function validateInquiry(payload) {
   if (inquiry.name.length < 2) errors.push("Enter your name.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiry.email)) errors.push("Enter a valid email address.");
   if (!allowedServices.has(inquiry.service)) errors.push("Choose a valid service.");
+  if (inquiry.timeline && !allowedTimelines.has(inquiry.timeline)) errors.push("Choose a valid timeline.");
+  if (inquiry.budget && !allowedBudgets.has(inquiry.budget)) errors.push("Choose a valid budget.");
   if (inquiry.message.length < 20) errors.push("Tell us a little more about the project.");
+  if ((inquiry.message.match(/https?:\/\//gi) || []).length > 3) errors.push("Too many links in the message.");
 
   return { inquiry, errors };
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function textLine(label, value) {
+  return `${label}: ${value || "Not provided"}`;
+}
+
+function buildInquiryEmail(inquiry, record) {
+  const subject = `New AeroVista ${inquiry.requestType}: ${inquiry.name}`;
+  const fields = [
+    ["Request type", inquiry.requestType],
+    ["Name", inquiry.name],
+    ["Email", inquiry.email],
+    ["Company", inquiry.company],
+    ["Service", inquiry.service],
+    ["Timeline", inquiry.timeline],
+    ["Estimated budget", inquiry.budget],
+    ["Submitted", record.createdAt],
+    ["Inquiry ID", record.id],
+  ];
+
+  const text = [
+    "New inquiry from aerovistaanalytics.com",
+    "",
+    ...fields.map(([label, value]) => textLine(label, value)),
+    "",
+    "Message:",
+    inquiry.message,
+  ].join("\n");
+
+  const rows = fields
+    .map(
+      ([label, value]) =>
+        `<tr><th align="left" style="padding:6px 12px 6px 0;color:#071936;">${escapeHtml(label)}</th><td style="padding:6px 0;color:#1c2b43;">${escapeHtml(value || "Not provided")}</td></tr>`
+    )
+    .join("");
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;color:#071936;line-height:1.5;">
+      <h1 style="font-size:20px;margin:0 0 16px;">New AeroVista Analytics Inquiry</h1>
+      <table style="border-collapse:collapse;margin-bottom:18px;">${rows}</table>
+      <h2 style="font-size:16px;margin:0 0 8px;">Message</h2>
+      <p style="white-space:pre-wrap;margin:0;color:#1c2b43;">${escapeHtml(inquiry.message)}</p>
+    </div>
+  `;
+
+  return { subject, text, html };
+}
+
+async function sendInquiryEmail(inquiry, record) {
+  if (!RESEND_API_KEY) {
+    const error = new Error("Email service is not configured.");
+    error.status = 503;
+    throw error;
+  }
+
+  const email = buildInquiryEmail(inquiry, record);
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+      "User-Agent": "aerovista-analytics-website/1.0",
+      "Idempotency-Key": record.id,
+    },
+    body: JSON.stringify({
+      from: CONTACT_FROM_EMAIL,
+      to: [CONTACT_TO_EMAIL],
+      reply_to: inquiry.email,
+      subject: email.subject,
+      text: email.text,
+      html: email.html,
+      tags: [
+        { name: "source", value: "website" },
+        { name: "request_type", value: inquiry.requestType.toLowerCase().replace(/\s+/g, "_") },
+      ],
+    }),
+  });
+
+  let result = {};
+  try {
+    result = await response.json();
+  } catch {
+    result = {};
+  }
+
+  if (!response.ok || !result.id) {
+    const error = new Error("Email delivery failed.");
+    error.status = response.status >= 500 ? 502 : 500;
+    error.providerStatus = response.status;
+    error.providerMessage = result.name || result.message || "unknown";
+    throw error;
+  }
+
+  return result.id;
+}
+
+function logDeliveryError(error, record) {
+  console.error(
+    JSON.stringify({
+      level: "error",
+      event: "inquiry_email_delivery_failed",
+      inquiryId: record.id,
+      provider: "resend",
+      providerStatus: error.providerStatus || null,
+      providerMessage: error.providerMessage || error.message || "unknown",
+      createdAt: new Date().toISOString(),
+    })
+  );
+}
+
+function logStorageError(error, record) {
+  console.error(
+    JSON.stringify({
+      level: "error",
+      event: "inquiry_storage_failed",
+      inquiryId: record.id,
+      message: error.message || "unknown",
+      createdAt: new Date().toISOString(),
+    })
+  );
 }
 
 async function handleInquiry(req, res) {
@@ -211,7 +350,30 @@ async function handleInquiry(req, res) {
       inquiry,
     };
 
-    fs.appendFileSync(INQUIRY_FILE, `${JSON.stringify(record)}\n`, { mode: 0o600 });
+    let emailId;
+    try {
+      emailId = await sendInquiryEmail(inquiry, record);
+    } catch (deliveryError) {
+      logDeliveryError(deliveryError, record);
+      sendJson(res, deliveryError.status || 502, {
+        ok: false,
+        error: "Your request could not be sent right now. Please email contact@aerovistaanalytics.com directly.",
+      });
+      return;
+    }
+
+    record.delivery = {
+      provider: "resend",
+      emailId,
+      deliveredAt: new Date().toISOString(),
+    };
+
+    try {
+      fs.appendFileSync(INQUIRY_FILE, `${JSON.stringify(record)}\n`, { mode: 0o600 });
+    } catch (storageError) {
+      logStorageError(storageError, record);
+    }
+
     sendJson(res, 201, {
       ok: true,
       id: record.id,
@@ -266,7 +428,7 @@ const server = http.createServer((req, res) => {
     const token = createCsrfToken();
     res.writeHead(200, {
       ...securityHeaders("application/json; charset=utf-8"),
-      "Set-Cookie": `av_csrf=${encodeURIComponent(token)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=7200`,
+      "Set-Cookie": `av_csrf=${encodeURIComponent(token)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=7200${csrfCookieSecure}`,
     });
     res.end(JSON.stringify({ ok: true, csrfToken: token }));
     return;
