@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 116" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">AeroVista Analytics</title>
+  <desc id="logoDesc">Modern AeroVista Analytics wordmark with a stylized A and flight path.</desc>
+  <defs>
+    <linearGradient id="swooshHeader" x1="36" y1="74" x2="151" y2="29" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#87a8bf"/>
+      <stop offset="0.55" stop-color="#5f86a2"/>
+      <stop offset="1" stop-color="#1d6fe8"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#061936" d="M38 83 76 11l38 72H92L77 49 61 83H38Z"/>
+    <path fill="url(#swooshHeader)" d="M16 78c47-29 100-46 153-52-42 14-83 31-123 55-11 6-22 7-30 4l-7-3 7-4Z"/>
+    <path fill="#061936" d="M100 83h27l-13-25-11 5 7 14c-2 4-5 6-10 6Z"/>
+    <text x="153" y="48" fill="#061936" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="800" letter-spacing="1.4">AEROVISTA</text>
+    <text x="155" y="74" fill="#061936" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="7.8">ANALYTICS</text>
+    <text x="155" y="99" fill="#6e8198" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="5.1">DATA ANALYTICS CONSULTING</text>
+  </g>
+</svg>

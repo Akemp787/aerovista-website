@@ -45,6 +45,7 @@ body {
   font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a {
@@ -501,6 +502,7 @@ svg {
   padding: 34px 36px;
 }
 
+.case-body h2,
 .case-body h3 {
   margin: 0 0 14px;
   font-size: 22px;
@@ -542,8 +544,8 @@ svg {
 
 .metric strong {
   display: block;
-  font-size: 26px;
-  line-height: 1;
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.08;
 }
 
 .metric small {
@@ -551,6 +553,32 @@ svg {
   margin-top: 4px;
   color: #24344d;
   font-size: 11px;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.case-scope {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.case-scope li {
+  position: relative;
+  padding-left: 20px;
+  color: #1c2b43;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.case-scope li::before {
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  content: ">";
+  font-weight: 900;
 }
 
 .about {
@@ -569,6 +597,7 @@ svg {
   width: 285px;
   height: 276px;
   object-fit: cover;
+  object-position: 50% 38%;
   border-radius: 6px;
 }
 
@@ -1254,6 +1283,10 @@ svg {
 }
 
 @media (max-width: 700px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
   .site-header,
   .header-inner {
     height: 72px;
@@ -1294,7 +1327,8 @@ svg {
 
   .hero h1 {
     max-width: 100%;
-    font-size: 30px;
+    font-size: 28px;
+    text-wrap: balance;
   }
 
   .hero p {
@@ -1306,7 +1340,9 @@ svg {
   }
 
   .section-heading h2 {
-    font-size: 22px;
+    font-size: 21px;
+    overflow-wrap: break-word;
+    text-wrap: balance;
   }
 
   .trust-grid,
@@ -1342,6 +1378,8 @@ svg {
 
   .service-card {
     min-height: auto;
+    padding-right: 22px;
+    padding-left: 22px;
   }
 
   .case-card {
@@ -1356,6 +1394,10 @@ svg {
 
   .metric:last-child {
     border-bottom: 0;
+  }
+
+  .metric strong {
+    font-size: 22px;
   }
 
   .credential {
@@ -1390,11 +1432,11 @@ svg {
 
 @media (max-width: 420px) {
   .container {
-    width: min(100% - 24px, 884px);
+    width: calc(100% - 32px);
   }
 
   .hero h1 {
-    font-size: 30px;
+    font-size: 27px;
   }
 
   .hero-actions .btn {
