@@ -25,10 +25,10 @@ const csrfCookieSecure = PUBLIC_SITE_URL.startsWith("https://") ? "; Secure" : "
 const allowedServices = new Set([
   "Data Analysis & Reporting",
   "Business Intelligence & Dashboards",
+  "Data Migration & Consolidation",
   "Process & Performance Analysis",
   "Data Cleaning & Validation",
   "Custom Reports & Automation",
-  "Analytics Strategy & Advisory",
   "Not sure yet",
 ]);
 
@@ -64,7 +64,7 @@ function securityHeaders(contentType = "text/plain; charset=utf-8") {
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
     "Content-Security-Policy": [
       "default-src 'self'",
-      "script-src 'self' 'sha256-p8b2rlfkYEzm7GJpZeJD5Uaxu/adbiI41l+4YMQIf/E='",
+      "script-src 'self' 'sha256-p2VFFReR6VdO+dGUJSmz9Oc1qPqi/Xh+TRpHprgboX4='",
       "style-src 'self'",
       "img-src 'self' data:",
       "font-src 'self'",

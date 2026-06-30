@@ -9,6 +9,8 @@
   --navy-2: #00244b;
   --white: #ffffff;
   --shadow: 0 12px 35px rgba(12, 35, 64, 0.11);
+  --font-heading: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
+  --font-body: Aptos, "Segoe UI Variable Text", "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 * {
@@ -53,10 +55,27 @@ body {
   margin: 0;
   color: var(--ink);
   background: #ffffff;
-  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+.site-nav,
+.header-cta,
+.btn,
+.section-heading p,
+.plan-label,
+.metric strong,
+.industry-list span,
+.process-steps span,
+.process-list span,
+.form-intent span,
+.contact-form label {
+  font-family: var(--font-heading);
 }
 
 a {
@@ -142,7 +161,7 @@ svg {
   justify-content: center;
   gap: 30px;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .site-nav a {
@@ -187,7 +206,7 @@ svg {
   border-radius: 4px;
   box-shadow: 0 8px 20px rgba(1, 25, 54, 0.18);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 850;
   white-space: nowrap;
 }
 
@@ -235,6 +254,7 @@ svg {
   font-size: 48px;
   line-height: 1.12;
   letter-spacing: 0;
+  font-weight: 850;
 }
 
 .accent-line,
@@ -286,7 +306,7 @@ svg {
   padding: 0 26px;
   border-radius: 4px;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 850;
   transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
   white-space: nowrap;
 }
@@ -303,8 +323,8 @@ svg {
 
 .btn-primary {
   color: #ffffff;
-  background: linear-gradient(180deg, #0d75ff, #0058d4);
-  box-shadow: 0 12px 28px rgba(0, 101, 232, 0.24);
+  background: linear-gradient(180deg, #0871f2, #0058d4);
+  box-shadow: 0 12px 28px rgba(0, 101, 232, 0.22);
 }
 
 .btn-secondary {
@@ -399,6 +419,7 @@ svg {
   font-size: 34px;
   line-height: 1.2;
   letter-spacing: 0;
+  font-weight: 850;
 }
 
 .section-heading.centered {
@@ -433,6 +454,17 @@ svg {
   border: 1px solid var(--line);
   border-radius: 5px;
   box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.service-card:hover,
+.detail-card:hover,
+.plan-card:hover,
+.process-steps article:hover,
+.industry-list span:hover {
+  border-color: #a8c9f2;
+  box-shadow: 0 14px 28px rgba(14, 52, 93, 0.08);
+  transform: translateY(-1px);
 }
 
 .service-icon {
@@ -447,6 +479,7 @@ svg {
   margin: 0 0 16px;
   font-size: 18px;
   line-height: 1.28;
+  font-weight: 850;
 }
 
 .service-card p {
@@ -495,7 +528,7 @@ svg {
   border-radius: 5px;
   box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 850;
   line-height: 1.35;
 }
 
@@ -586,6 +619,7 @@ svg {
   margin: 0 0 14px;
   font-size: 22px;
   line-height: 1.25;
+  font-weight: 850;
 }
 
 .case-body > p {
@@ -702,6 +736,7 @@ svg {
   color: var(--ink);
   font-size: 20px;
   line-height: 1.25;
+  font-weight: 850;
 }
 
 .process-steps p {
@@ -813,6 +848,7 @@ svg {
   margin: 0;
   font-size: 26px;
   line-height: 1.25;
+  font-weight: 850;
 }
 
 .cta-inner p {
@@ -1074,6 +1110,7 @@ svg {
   border: 1px solid var(--line);
   border-radius: 5px;
   box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .detail-card {
@@ -1090,6 +1127,7 @@ svg {
   color: var(--ink);
   font-size: 24px;
   line-height: 1.25;
+  font-weight: 850;
 }
 
 .detail-card p,
