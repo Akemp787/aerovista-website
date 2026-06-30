@@ -9,7 +9,7 @@ services:
       - key: PUBLIC_SITE_URL
         value: https://aerovistaanalytics.com
       - key: PUBLIC_CONTACT_EMAIL
-        value: hello@aerovistaanalytics.com
+        value: contact@aerovistaanalytics.com
       - key: OWNER_EMAIL
         value: kempa@aerovistaanalytics.com
       - key: CSRF_SECRET

@@ -33,11 +33,11 @@ Copy `.env.example` values into your hosting provider's environment settings:
 ```text
 PORT=3000
 PUBLIC_SITE_URL=https://aerovistaanalytics.com
-PUBLIC_CONTACT_EMAIL=hello@aerovistaanalytics.com
+PUBLIC_CONTACT_EMAIL=contact@aerovistaanalytics.com
 OWNER_EMAIL=kempa@aerovistaanalytics.com
 ```
 
-Use `hello@aerovistaanalytics.com` publicly and forward it to the owner inbox through your domain email provider.
+Use `contact@aerovistaanalytics.com` publicly and forward it to the owner inbox through your domain email provider.
 
 ## Deploy With Render
 

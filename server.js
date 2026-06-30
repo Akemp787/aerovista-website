@@ -8,7 +8,7 @@ const { URL } = require("node:url");
 
 const PORT = Number(process.env.PORT || 3000);
 const PUBLIC_SITE_URL = process.env.PUBLIC_SITE_URL || "https://aerovistaanalytics.com";
-const PUBLIC_CONTACT_EMAIL = process.env.PUBLIC_CONTACT_EMAIL || "hello@aerovistaanalytics.com";
+const PUBLIC_CONTACT_EMAIL = process.env.PUBLIC_CONTACT_EMAIL || "contact@aerovistaanalytics.com";
 const ROOT = __dirname;
 const STORAGE_DIR = path.join(ROOT, "storage");
 const INQUIRY_FILE = path.join(STORAGE_DIR, "inquiries.jsonl");
