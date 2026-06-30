@@ -616,6 +616,10 @@ svg {
   line-height: 1.7;
 }
 
+.about-copy > p:last-child {
+  margin-bottom: 0;
+}
+
 .credential-row {
   display: grid;
   grid-template-columns: 1.05fr 1fr 1fr;
