@@ -975,6 +975,10 @@ svg {
   gap: 16px;
 }
 
+.form-full {
+  width: 100%;
+}
+
 .contact-form label {
   display: grid;
   gap: 7px;
@@ -1040,6 +1044,13 @@ svg {
 .form-submit:disabled {
   cursor: wait;
   opacity: 0.65;
+}
+
+.pricing-note {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
 }
 
 .form-status {

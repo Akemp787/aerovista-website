@@ -33,7 +33,6 @@ const allowedServices = new Set([
 ]);
 
 const allowedTimelines = new Set(["Flexible", "ASAP", "2-4 weeks", "1-3 months", "3+ months"]);
-const allowedBudgets = new Set(["Not sure yet", "Under $2,500", "$2,500-$5,000", "$5,000-$10,000", "$10,000+"]);
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -173,7 +172,6 @@ function validateInquiry(payload) {
     company: clean(payload.company, 120),
     service: clean(payload.service, 80),
     timeline: clean(payload.timeline, 60),
-    budget: clean(payload.budget, 60),
     message: clean(payload.message, 2000),
     website: clean(payload.website, 200),
   };
@@ -185,7 +183,6 @@ function validateInquiry(payload) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiry.email)) errors.push("Enter a valid email address.");
   if (!allowedServices.has(inquiry.service)) errors.push("Choose a valid service.");
   if (inquiry.timeline && !allowedTimelines.has(inquiry.timeline)) errors.push("Choose a valid timeline.");
-  if (inquiry.budget && !allowedBudgets.has(inquiry.budget)) errors.push("Choose a valid budget.");
   if (inquiry.message.length < 20) errors.push("Tell us a little more about the project.");
   if ((inquiry.message.match(/https?:\/\//gi) || []).length > 3) errors.push("Too many links in the message.");
 
@@ -214,7 +211,6 @@ function buildInquiryEmail(inquiry, record) {
     ["Company", inquiry.company],
     ["Service", inquiry.service],
     ["Timeline", inquiry.timeline],
-    ["Estimated budget", inquiry.budget],
     ["Submitted", record.createdAt],
     ["Inquiry ID", record.id],
   ];

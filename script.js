@@ -46,7 +46,6 @@ function formToPayload(form) {
     company: data.get("company"),
     service: data.get("service"),
     timeline: data.get("timeline"),
-    budget: data.get("budget"),
     message: data.get("message"),
     website: data.get("website"),
   };
