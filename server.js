@@ -13,13 +13,13 @@ const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || "contact@aerovistaanaly
 const CONTACT_FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "AeroVista Analytics <contact@aerovistaanalytics.com>";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const ROOT = __dirname;
-const STORAGE_DIR = path.join(ROOT, "storage");
-const INQUIRY_FILE = path.join(STORAGE_DIR, "inquiries.jsonl");
 const MAX_BODY_BYTES = 24 * 1024;
 const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT = 6;
+const MAX_RATE_BUCKETS = 10000;
 const csrfSecret = process.env.CSRF_SECRET || crypto.randomBytes(32).toString("hex");
 const requestCounts = new Map();
+let lastRateLimitCleanup = Date.now();
 const csrfCookieSecure = PUBLIC_SITE_URL.startsWith("https://") ? "; Secure" : "";
 
 const allowedServices = new Set([
@@ -49,17 +49,58 @@ const mimeTypes = {
   ".txt": "text/plain; charset=utf-8",
 };
 
-fs.mkdirSync(STORAGE_DIR, { recursive: true });
+function normalizeHostname(hostname = "") {
+  return String(hostname).trim().toLowerCase().replace(/^\[(.*)\]$/, "$1").replace(/\.$/, "");
+}
+
+function hostnameFromUrl(value) {
+  try {
+    return normalizeHostname(new URL(value).hostname);
+  } catch {
+    return "";
+  }
+}
+
+function hostnameFromHostHeader(value = "") {
+  const host = String(value).trim().toLowerCase();
+  if (!host) return "";
+  if (host.startsWith("[")) {
+    const end = host.indexOf("]");
+    return end === -1 ? "" : normalizeHostname(host.slice(1, end));
+  }
+  return normalizeHostname(host.split(":")[0]);
+}
+
+const configuredAllowedHosts = (process.env.ALLOWED_HOSTS || "")
+  .split(",")
+  .map(normalizeHostname)
+  .filter(Boolean);
+
+const allowedHosts = new Set(
+  [
+    hostnameFromUrl(PUBLIC_SITE_URL),
+    "aerovistaanalytics.com",
+    "www.aerovistaanalytics.com",
+    "aerovista-analytics.onrender.com",
+    "localhost",
+    "127.0.0.1",
+    "::1",
+    ...configuredAllowedHosts,
+  ].filter(Boolean)
+);
 
 function securityHeaders(contentType = "text/plain; charset=utf-8") {
   return {
     "Content-Type": contentType,
     "X-Content-Type-Options": "nosniff",
+    "X-DNS-Prefetch-Control": "off",
     "X-Frame-Options": "DENY",
+    "X-Permitted-Cross-Domain-Policies": "none",
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Cross-Origin-Resource-Policy": "same-origin",
+    "Origin-Agent-Cluster": "?1",
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
     "Content-Security-Policy": [
       "default-src 'self'",
@@ -76,12 +117,29 @@ function securityHeaders(contentType = "text/plain; charset=utf-8") {
   };
 }
 
+function sendText(res, status, message) {
+  res.writeHead(status, {
+    ...securityHeaders(),
+    "Cache-Control": "no-store",
+  });
+  res.end(message);
+}
+
 function sendJson(res, status, payload) {
   res.writeHead(status, {
     ...securityHeaders("application/json; charset=utf-8"),
     "Cache-Control": "no-store",
   });
   res.end(JSON.stringify(payload));
+}
+
+function isAllowedHost(req) {
+  return allowedHosts.has(hostnameFromHostHeader(req.headers.host || ""));
+}
+
+function isAllowedOrigin(originHeader) {
+  if (!originHeader) return true;
+  return allowedHosts.has(hostnameFromUrl(originHeader));
 }
 
 function parseCookies(cookieHeader = "") {
@@ -122,6 +180,19 @@ function getClientIp(req) {
 function rateLimit(req) {
   const ip = getClientIp(req);
   const now = Date.now();
+
+  if (now - lastRateLimitCleanup > RATE_WINDOW_MS || requestCounts.size > MAX_RATE_BUCKETS) {
+    for (const [key, timestamps] of requestCounts.entries()) {
+      const recent = timestamps.filter((timestamp) => now - timestamp < RATE_WINDOW_MS);
+      if (recent.length) {
+        requestCounts.set(key, recent);
+      } else {
+        requestCounts.delete(key);
+      }
+    }
+    lastRateLimitCleanup = now;
+  }
+
   const bucket = requestCounts.get(ip) || [];
   const recent = bucket.filter((timestamp) => now - timestamp < RATE_WINDOW_MS);
   recent.push(now);
@@ -305,19 +376,17 @@ function logDeliveryError(error, record) {
   );
 }
 
-function logStorageError(error, record) {
-  console.error(
-    JSON.stringify({
-      level: "error",
-      event: "inquiry_storage_failed",
-      inquiryId: record.id,
-      message: error.message || "unknown",
-      createdAt: new Date().toISOString(),
-    })
-  );
-}
-
 async function handleInquiry(req, res) {
+  if (!isAllowedOrigin(req.headers.origin)) {
+    sendJson(res, 403, { ok: false, error: "Request origin is not allowed." });
+    return;
+  }
+
+  if (req.headers["sec-fetch-site"] === "cross-site") {
+    sendJson(res, 403, { ok: false, error: "Cross-site requests are not allowed." });
+    return;
+  }
+
   if (!rateLimit(req)) {
     sendJson(res, 429, { ok: false, error: "Too many requests. Please try again later." });
     return;
@@ -370,12 +439,6 @@ async function handleInquiry(req, res) {
       deliveredAt: new Date().toISOString(),
     };
 
-    try {
-      fs.appendFileSync(INQUIRY_FILE, `${JSON.stringify(record)}\n`, { mode: 0o600 });
-    } catch (storageError) {
-      logStorageError(storageError, record);
-    }
-
     sendJson(res, 201, {
       ok: true,
       id: record.id,
@@ -387,7 +450,19 @@ async function handleInquiry(req, res) {
 }
 
 function serveStatic(req, res, pathname) {
-  let requestedPath = decodeURIComponent(pathname);
+  let requestedPath;
+  try {
+    requestedPath = decodeURIComponent(pathname);
+  } catch {
+    sendText(res, 400, "Bad request");
+    return;
+  }
+
+  if (requestedPath.includes("\0")) {
+    sendText(res, 400, "Bad request");
+    return;
+  }
+
   if (requestedPath === "/") requestedPath = "/index.html";
 
   const normalized = path.normalize(requestedPath).replace(/^(\.\.[/\\])+/, "");
@@ -400,15 +475,13 @@ function serveStatic(req, res, pathname) {
     path.isAbsolute(relative) ||
     ["server.js", "package.json", ".env", ".env.example", "storage", "work"].includes(firstSegment)
   ) {
-    res.writeHead(404, securityHeaders());
-    res.end("Not found");
+    sendText(res, 404, "Not found");
     return;
   }
 
   fs.readFile(filePath, (error, data) => {
     if (error) {
-      res.writeHead(404, securityHeaders());
-      res.end("Not found");
+      sendText(res, 404, "Not found");
       return;
     }
 
@@ -424,11 +497,16 @@ function serveStatic(req, res, pathname) {
       headers["Cache-Control"] = "no-store";
     }
     res.writeHead(200, headers);
-    res.end(data);
+    res.end(req.method === "HEAD" ? undefined : data);
   });
 }
 
 const server = http.createServer((req, res) => {
+  if (!isAllowedHost(req)) {
+    sendText(res, 400, "Bad request");
+    return;
+  }
+
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
 
   if (req.method === "GET" && url.pathname === "/api/health") {
@@ -456,8 +534,18 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  res.writeHead(405, securityHeaders());
-  res.end("Method not allowed");
+  sendText(res, 405, "Method not allowed");
+});
+
+server.requestTimeout = 15000;
+server.headersTimeout = 16000;
+server.keepAliveTimeout = 5000;
+server.maxHeadersCount = 64;
+
+server.on("clientError", (_error, socket) => {
+  if (socket.writable) {
+    socket.end("HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n");
+  }
 });
 
 server.listen(PORT, () => {

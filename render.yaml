@@ -8,14 +8,14 @@ services:
     envVars:
       - key: PUBLIC_SITE_URL
         value: https://aerovistaanalytics.com
+      - key: ALLOWED_HOSTS
+        value: aerovistaanalytics.com,www.aerovistaanalytics.com,aerovista-analytics.onrender.com
       - key: PUBLIC_CONTACT_EMAIL
         value: contact@aerovistaanalytics.com
       - key: CONTACT_TO_EMAIL
         value: contact@aerovistaanalytics.com
       - key: CONTACT_FROM_EMAIL
         value: "AeroVista Analytics <contact@aerovistaanalytics.com>"
-      - key: OWNER_EMAIL
-        value: kempa@aerovistaanalytics.com
       - key: RESEND_API_KEY
         sync: false
       - key: CSRF_SECRET

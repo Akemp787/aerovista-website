@@ -27,10 +27,12 @@ Set `PUBLIC_SITE_URL` to the local HTTP URL while testing locally. In production
 - Uses a honeypot field and IP-based rate limiting.
 - Validates and sanitizes submitted fields server-side.
 - Sets the visitor email as the email `Reply-To`.
-- Stores successfully delivered inquiries privately in `storage/inquiries.jsonl`.
+- Does not store inquiry bodies on the web server; delivered email is the inquiry record.
+- Restricts accepted hostnames and blocks cross-site form posts.
+- Uses short request timeouts and rejects malformed URLs safely.
 - Logs email delivery errors server-side without returning provider details to visitors.
 
-The `storage` folder is blocked from public web access by `server.js`. On Render's free web service filesystem, this file should be treated as a temporary operational log rather than permanent storage; the delivered email is the primary inquiry record unless durable storage is added later.
+There is no login system, payment processing, or billing code in this website. The main backend risk area is the inquiry form, which is intentionally limited to email delivery only.
 
 ## Environment Variables
 
@@ -39,10 +41,10 @@ Copy `.env.example` values into your hosting provider's environment settings:
 ```text
 PORT=3000
 PUBLIC_SITE_URL=https://aerovistaanalytics.com
+ALLOWED_HOSTS=aerovistaanalytics.com,www.aerovistaanalytics.com,aerovista-analytics.onrender.com
 PUBLIC_CONTACT_EMAIL=contact@aerovistaanalytics.com
 CONTACT_TO_EMAIL=contact@aerovistaanalytics.com
 CONTACT_FROM_EMAIL=AeroVista Analytics <contact@aerovistaanalytics.com>
-OWNER_EMAIL=kempa@aerovistaanalytics.com
 RESEND_API_KEY=your_resend_api_key
 CSRF_SECRET=generate_a_long_random_secret
 ```
@@ -80,6 +82,7 @@ CONTACT_TO_EMAIL=contact@aerovistaanalytics.com
 CONTACT_FROM_EMAIL=AeroVista Analytics <contact@aerovistaanalytics.com>
 PUBLIC_CONTACT_EMAIL=contact@aerovistaanalytics.com
 PUBLIC_SITE_URL=https://aerovistaanalytics.com
+ALLOWED_HOSTS=aerovistaanalytics.com,www.aerovistaanalytics.com,aerovista-analytics.onrender.com
 CSRF_SECRET=<long random string>
 ```
 
