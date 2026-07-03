@@ -1518,7 +1518,106 @@ svg {
   margin-top: 12px;
 }
 
-@media (max-width: 1180px) {
+@media (min-width: 901px) and (max-width: 1180px) {
+  .container {
+    width: min(1080px, calc(100% - 32px));
+  }
+
+  .header-inner {
+    grid-template-columns: 178px minmax(0, 1fr) 188px;
+    gap: 14px;
+  }
+
+  .brand img {
+    width: 178px;
+    height: 46px;
+  }
+
+  .site-nav {
+    gap: 14px;
+    font-size: 11.5px;
+  }
+
+  .header-cta {
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 12px;
+  }
+
+  .hero-copy {
+    width: 500px;
+  }
+
+  .hero h1 {
+    max-width: 500px;
+    font-size: 42px;
+  }
+
+  .hero p {
+    max-width: 470px;
+  }
+
+  .trust-grid {
+    gap: 22px;
+  }
+
+  .trust-item {
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+  }
+
+  .line-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .service-grid {
+    gap: 14px;
+  }
+
+  .service-card {
+    min-height: 330px;
+    padding: 30px 18px 24px;
+  }
+
+  .service-card h3 {
+    font-size: 16px;
+  }
+
+  .service-card p {
+    font-size: 12px;
+  }
+
+  .impact-grid {
+    grid-template-columns: 300px 1fr;
+    gap: 32px;
+  }
+
+  .case-card {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .case-meta,
+  .case-body {
+    padding: 28px;
+  }
+
+  .detail-grid,
+  .plan-grid,
+  .migration-grid,
+  .proof-grid {
+    gap: 18px;
+  }
+
+  .detail-card,
+  .plan-card,
+  .migration-card,
+  .trust-note-card {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 900px) {
   .container {
     width: min(884px, calc(100% - 32px));
   }
