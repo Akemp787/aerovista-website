@@ -68,6 +68,7 @@ h3,
 .header-cta,
 .btn,
 .section-heading p,
+.section-kicker,
 .plan-label,
 .metric strong,
 .industry-list span,
@@ -511,6 +512,15 @@ svg {
   align-items: center;
 }
 
+.industry-copy > p {
+  max-width: 430px;
+  margin: 18px 0 0;
+  color: #1c2b43;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
 .industry-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -530,6 +540,74 @@ svg {
   font-size: 14px;
   font-weight: 850;
   line-height: 1.35;
+}
+
+.assessment-section {
+  padding-top: 44px;
+  padding-bottom: 44px;
+  background: #ffffff;
+}
+
+.assessment-card {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 34px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.section-kicker {
+  margin: 0 0 8px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.assessment-card h2,
+.trust-note-card h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 850;
+}
+
+.assessment-card p,
+.trust-note-card p {
+  margin: 0;
+  color: #1c2b43;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.assessment-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.assessment-card li {
+  position: relative;
+  padding-left: 22px;
+  color: #1c2b43;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.assessment-card li::before {
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  content: ">";
+  font-weight: 900;
 }
 
 .impact {
@@ -1046,11 +1124,19 @@ svg {
   opacity: 0.65;
 }
 
-.pricing-note {
+.pricing-note,
+.quality-note {
   margin: -2px 0 0;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.65;
+}
+
+.quality-note {
+  padding: 11px 13px;
+  background: #f7fbff;
+  border-left: 3px solid #bdd6f6;
+  border-radius: 4px;
 }
 
 .form-status {
@@ -1104,7 +1190,9 @@ svg {
 
 .detail-section,
 .plan-section,
-.process-section {
+.process-section,
+.proof-section,
+.trust-note-section {
   background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
 }
 
@@ -1155,6 +1243,58 @@ svg {
   color: var(--blue);
   font-size: 14px;
   font-weight: 900;
+}
+
+.migration-feature {
+  padding-top: 0;
+  background: #ffffff;
+}
+
+.migration-card,
+.trust-note-card {
+  padding: 34px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+}
+
+.migration-grid,
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.migration-grid article {
+  padding: 24px;
+  background: #f8fbff;
+  border: 1px solid #dbe8f6;
+  border-radius: 5px;
+}
+
+.migration-grid h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 850;
+}
+
+.migration-grid p {
+  margin: 0;
+  color: #1c2b43;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.trust-note-section {
+  padding-top: 0;
+}
+
+.trust-note-card {
+  max-width: 900px;
 }
 
 .plan-grid {
@@ -1355,6 +1495,13 @@ svg {
   line-height: 1.12;
 }
 
+.legal-content h2 {
+  margin: 28px 0 12px;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
 .legal-content p {
   margin: 0 0 15px;
   color: #1c2b43;
@@ -1449,7 +1596,10 @@ svg {
   .request-grid,
   .detail-grid,
   .plan-grid,
-  .industries-grid {
+  .industries-grid,
+  .assessment-card,
+  .migration-grid,
+  .proof-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1522,9 +1672,28 @@ svg {
   .hero-copy,
   .trust-item,
   .service-card,
+  .service-card p,
+  .section-heading,
+  .section-heading h2,
+  .industry-copy,
+  .industry-copy > p,
   .industry-list span,
+  .assessment-card,
+  .assessment-card p,
+  .migration-grid article,
+  .migration-grid p,
+  .detail-card,
+  .detail-card p,
+  .request-copy > p,
+  .contact-methods a,
+  .contact-methods span,
+  .pricing-note,
+  .quality-note,
+  .form-note,
   .process-steps article {
+    max-width: 100%;
     overflow-wrap: break-word;
+    word-break: normal;
   }
 
   .hero h1 {
@@ -1535,9 +1704,12 @@ svg {
 
   .hero p {
     max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
-  .hero-actions .btn {
+  .hero-actions .btn,
+  .btn {
+    max-width: 100%;
     width: 100%;
     white-space: normal;
     text-align: center;
@@ -1545,7 +1717,8 @@ svg {
 
   .section-heading h2 {
     font-size: 21px;
-    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: anywhere;
     text-wrap: balance;
   }
 
@@ -1555,6 +1728,9 @@ svg {
   .metric-row,
   .credential-row,
   .industry-list,
+  .assessment-card,
+  .migration-grid,
+  .proof-grid,
   .process-steps,
   .form-intent,
   .form-row,
