@@ -68,6 +68,7 @@ h3,
 .header-cta,
 .btn,
 .section-heading p,
+.hero-kicker,
 .section-kicker,
 .plan-label,
 .metric strong,
@@ -247,6 +248,15 @@ svg {
 .hero-copy {
   width: 540px;
   padding-bottom: 6px;
+}
+
+.hero-kicker {
+  margin: 0 0 12px;
+  color: #8cc4ff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .hero h1 {
@@ -499,6 +509,47 @@ svg {
   font-weight: 900;
 }
 
+.why-section {
+  background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.why-grid article,
+.timeline-grid article {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+}
+
+.why-grid article {
+  min-height: 178px;
+  padding: 28px;
+}
+
+.why-grid h3,
+.timeline-grid h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 850;
+}
+
+.why-grid p,
+.timeline-grid p {
+  margin: 0;
+  color: #1c2b43;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 .industries {
   padding-top: 54px;
   padding-bottom: 54px;
@@ -546,6 +597,53 @@ svg {
   padding-top: 44px;
   padding-bottom: 44px;
   background: #ffffff;
+}
+
+.migration-workflow-section {
+  background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.timeline-grid article {
+  position: relative;
+  min-height: 190px;
+  padding: 26px;
+}
+
+.timeline-grid article::after {
+  position: absolute;
+  top: 38px;
+  right: -12px;
+  width: 24px;
+  height: 2px;
+  background: #9fc6f4;
+  content: "";
+}
+
+.timeline-grid article:nth-child(4n)::after,
+.timeline-grid article:last-child::after {
+  display: none;
+}
+
+.timeline-grid span {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.centered-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
 }
 
 .assessment-card {
@@ -1605,7 +1703,8 @@ svg {
   .detail-grid,
   .plan-grid,
   .migration-grid,
-  .proof-grid {
+  .proof-grid,
+  .why-grid {
     gap: 18px;
   }
 
@@ -1698,13 +1797,19 @@ svg {
   .industries-grid,
   .assessment-card,
   .migration-grid,
-  .proof-grid {
+  .proof-grid,
+  .why-grid {
     grid-template-columns: 1fr;
   }
 
   .industry-list,
-  .process-steps {
+  .process-steps,
+  .timeline-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline-grid article::after {
+    display: none;
   }
 
   .plan-card {
@@ -1779,6 +1884,10 @@ svg {
   .industry-list span,
   .assessment-card,
   .assessment-card p,
+  .why-grid article,
+  .why-grid p,
+  .timeline-grid article,
+  .timeline-grid p,
   .migration-grid article,
   .migration-grid p,
   .detail-card,
@@ -1830,6 +1939,8 @@ svg {
   .assessment-card,
   .migration-grid,
   .proof-grid,
+  .why-grid,
+  .timeline-grid,
   .process-steps,
   .form-intent,
   .form-row,
