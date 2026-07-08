@@ -23,6 +23,8 @@ let lastRateLimitCleanup = Date.now();
 const csrfCookieSecure = PUBLIC_SITE_URL.startsWith("https://") ? "; Secure" : "";
 
 const allowedServices = new Set([
+  "Membership Data Diagnostic",
+  "Data Quality & Reconciliation",
   "Trusted Data & Data Quality",
   "Executive Reporting & Business Intelligence",
   "Data Migration & Modernization",

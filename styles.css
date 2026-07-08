@@ -35,6 +35,11 @@ body,
 .request-copy,
 .contact-form,
 .form-row label,
+.problem-grid,
+.problem-card,
+.offer-grid,
+.offer-card,
+.philosophy-card,
 .footer-grid > * {
   min-width: 0;
 }
@@ -450,9 +455,42 @@ svg {
   background: #ffffff;
 }
 
+.problem-section {
+  background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) 1.28fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.problem-card,
+.philosophy-card {
+  padding: 34px 38px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.problem-card p,
+.philosophy-card p {
+  margin: 0 0 16px;
+  color: #1c2b43;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.problem-card p:last-child,
+.philosophy-card p:last-child {
+  margin-bottom: 0;
+}
+
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 34px;
 }
@@ -474,6 +512,7 @@ svg {
 .service-card:hover,
 .detail-card:hover,
 .plan-card:hover,
+.offer-card:hover,
 .process-steps article:hover,
 .industry-list span:hover {
   border-color: #a8c9f2;
@@ -510,6 +549,85 @@ svg {
   color: var(--blue);
   font-size: 13px;
   font-weight: 900;
+}
+
+.offer-section {
+  background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.offer-card {
+  display: flex;
+  min-height: 430px;
+  flex-direction: column;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+}
+
+.offer-card h3 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.22;
+}
+
+.offer-card p {
+  margin: 0 0 18px;
+  color: #1c2b43;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.offer-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.offer-card li {
+  position: relative;
+  padding-left: 20px;
+  color: #1c2b43;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.offer-card li::before {
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  content: ">";
+  font-weight: 900;
+}
+
+.offer-card .btn {
+  margin-top: auto;
+}
+
+.philosophy-section {
+  background: #ffffff;
+}
+
+.philosophy-card {
+  max-width: 900px;
+}
+
+.philosophy-card h2 {
+  margin: 0 0 18px;
+  color: var(--ink);
+  font-size: 34px;
+  line-height: 1.15;
 }
 
 .why-section {
@@ -611,6 +729,16 @@ svg {
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-top: 34px;
+}
+
+.workflow-intro {
+  max-width: 830px;
+  margin: 18px auto 0;
+  color: #1c2b43;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
 }
 
 .timeline-grid article {
@@ -810,7 +938,7 @@ svg {
 
 .metric-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   margin-bottom: 24px;
 }
 
@@ -1855,11 +1983,11 @@ svg {
   }
 
   .service-grid {
-    gap: 14px;
+    gap: 18px;
   }
 
   .service-card {
-    min-height: 330px;
+    min-height: 310px;
     padding: 30px 18px 24px;
   }
 
@@ -1887,10 +2015,15 @@ svg {
 
   .detail-grid,
   .plan-grid,
+  .offer-grid,
   .migration-grid,
   .proof-grid,
   .why-grid {
     gap: 18px;
+  }
+
+  .offer-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .case-study-layout {
@@ -1904,6 +2037,7 @@ svg {
 
   .detail-card,
   .plan-card,
+  .offer-card,
   .migration-card,
   .trust-note-card {
     padding: 28px;
@@ -1979,13 +2113,15 @@ svg {
   }
 
   .trust-grid,
-  .service-grid {
+  .service-grid,
+  .offer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .impact-grid,
   .about-grid,
   .request-grid,
+  .problem-grid,
   .case-study-layout,
   .detail-grid,
   .plan-grid,
@@ -2008,6 +2144,10 @@ svg {
   }
 
   .plan-card {
+    min-height: auto;
+  }
+
+  .offer-card {
     min-height: auto;
   }
 
@@ -2089,12 +2229,20 @@ svg {
 
   .hero-copy {
     width: 100%;
+    min-width: 0;
   }
 
   .hero-copy,
   .trust-item,
   .service-card,
   .service-card p,
+  .problem-card,
+  .problem-card p,
+  .offer-card,
+  .offer-card p,
+  .offer-card li,
+  .philosophy-card,
+  .philosophy-card p,
   .section-heading,
   .section-heading h2,
   .industry-copy,
@@ -2132,7 +2280,8 @@ svg {
   .hero h1 {
     max-width: 100%;
     font-size: 28px;
-    text-wrap: balance;
+    overflow-wrap: anywhere;
+    text-wrap: wrap;
   }
 
   .hero p {
@@ -2144,8 +2293,15 @@ svg {
   .btn {
     max-width: 100%;
     width: 100%;
+    min-width: 0;
     white-space: normal;
     text-align: center;
+  }
+
+  .hero-kicker {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
   }
 
   .section-heading h2 {
@@ -2157,6 +2313,7 @@ svg {
 
   .trust-grid,
   .service-grid,
+  .offer-grid,
   .case-card,
   .metric-row,
   .credential-row,
@@ -2212,6 +2369,19 @@ svg {
     min-height: auto;
     padding-right: 22px;
     padding-left: 22px;
+  }
+
+  .problem-card,
+  .philosophy-card {
+    padding: 24px 22px;
+  }
+
+  .philosophy-card h2 {
+    font-size: 26px;
+  }
+
+  .offer-card {
+    padding: 24px 22px;
   }
 
   .case-card {
@@ -2280,7 +2450,7 @@ svg {
   }
 
   .hero h1 {
-    font-size: 27px;
+    font-size: 26px;
   }
 
   .hero-actions .btn {
