@@ -22,17 +22,21 @@ Set `PUBLIC_SITE_URL` to the local HTTP URL while testing locally. In production
 - Serves the website pages and assets.
 - Accepts consultation and quote requests at `POST /api/inquiries`.
 - Sends each valid inquiry to `contact@aerovistaanalytics.com` through Resend.
+- Creates Stripe Checkout Sessions for the Member Data Readiness Kit at `POST /api/member-kit/checkout`.
+- Verifies Stripe webhooks at `POST /api/stripe/webhook`.
+- Emails the Member Data Readiness Kit after Stripe confirms successful payment.
 - Uses CSRF protection through `GET /api/csrf`.
 - Applies security headers, including CSP and frame protection.
 - Uses a honeypot field and IP-based rate limiting.
 - Validates and sanitizes submitted fields server-side.
 - Sets the visitor email as the email `Reply-To`.
 - Does not store inquiry bodies on the web server; delivered email is the inquiry record.
+- Stores only minimal product fulfillment status server-side to prevent duplicate delivery.
 - Restricts accepted hostnames and blocks cross-site form posts.
 - Uses short request timeouts and rejects malformed URLs safely.
 - Logs email delivery errors server-side without returning provider details to visitors.
 
-There is no login system, payment processing, or billing code in this website. The main backend risk area is the inquiry form, which is intentionally limited to email delivery only.
+There is no login system or customer account area. Payment is handled through Stripe-hosted Checkout; card details never touch this server.
 
 ## Environment Variables
 
@@ -47,11 +51,16 @@ CONTACT_TO_EMAIL=contact@aerovistaanalytics.com
 CONTACT_FROM_EMAIL=AeroVista Analytics <contact@aerovistaanalytics.com>
 RESEND_API_KEY=your_resend_api_key
 CSRF_SECRET=generate_a_long_random_secret
+STRIPE_SECRET_KEY=sk_live_or_test_key
+STRIPE_WEBHOOK_SECRET=whsec_webhook_signing_secret
+MEMBER_KIT_STRIPE_PRICE_ID=price_optional_precreated_price_id
+MEMBER_KIT_PRICE_CENTS=1700
+MEMBER_KIT_DELIVERY_DIR=
 ```
 
 Use `contact@aerovistaanalytics.com` publicly and forward it to the owner inbox through your domain email provider.
 
-Do not commit real secret values. Add `RESEND_API_KEY` and `CSRF_SECRET` only in Render's Environment settings.
+Do not commit real secret values. Add `RESEND_API_KEY`, `CSRF_SECRET`, `STRIPE_SECRET_KEY`, and `STRIPE_WEBHOOK_SECRET` only in Render's Environment settings.
 
 ## Deploy With Render
 
@@ -84,12 +93,60 @@ PUBLIC_CONTACT_EMAIL=contact@aerovistaanalytics.com
 PUBLIC_SITE_URL=https://aerovistaanalytics.com
 ALLOWED_HOSTS=aerovistaanalytics.com,www.aerovistaanalytics.com,aerovista-analytics.onrender.com
 CSRF_SECRET=<long random string>
+STRIPE_SECRET_KEY=<your Stripe secret key>
+STRIPE_WEBHOOK_SECRET=<your Stripe webhook signing secret>
+MEMBER_KIT_STRIPE_PRICE_ID=<optional Stripe Price ID>
+MEMBER_KIT_PRICE_CENTS=1700
 ```
 
 6. Redeploy the Render service.
 7. Submit a test inquiry on the live contact form. The page should show success only after Resend confirms the email was accepted.
 
 If Resend rejects the message or the API key is missing, the visitor sees a generic error asking them to email `contact@aerovistaanalytics.com` directly, while the server logs a sanitized delivery error.
+
+### Stripe Product Delivery Setup
+
+The Member Data Readiness Kit checkout uses Stripe-hosted Checkout. The frontend never receives the Stripe secret key, and card details are handled by Stripe.
+
+1. In Stripe, create or confirm your account branding under **Settings > Branding**.
+2. Optional but recommended: create a product named `Member Data Readiness Kit` with a one-time price of `$17.00 USD`.
+3. Copy the Stripe Price ID, which starts with `price_`, into Render as `MEMBER_KIT_STRIPE_PRICE_ID`.
+4. If `MEMBER_KIT_STRIPE_PRICE_ID` is blank, the backend creates Checkout Sessions with server-side `price_data` using `MEMBER_KIT_PRICE_CENTS=1700`.
+5. In Stripe, create a webhook endpoint:
+
+```text
+https://aerovistaanalytics.com/api/stripe/webhook
+```
+
+6. Subscribe the webhook endpoint to these events:
+
+```text
+checkout.session.completed
+checkout.session.async_payment_succeeded
+checkout.session.async_payment_failed
+```
+
+7. Copy the webhook signing secret, which starts with `whsec_`, into Render as `STRIPE_WEBHOOK_SECRET`.
+8. Add `STRIPE_SECRET_KEY` in Render. Use test keys while testing and live keys only when ready to accept real payments.
+9. Add the paid product files before accepting live purchases:
+
+```text
+private/downloads/member-data-readiness-kit/Member_Data_Readiness_Kit.zip
+```
+
+The backend emails the ZIP after verified payment. If the ZIP is not present, it looks for:
+
+```text
+private/downloads/member-data-readiness-kit/Member_Data_Readiness_Kit_Guide.pdf
+private/downloads/member-data-readiness-kit/Member_Data_Readiness_Kit_Workbook.xlsx
+```
+
+The `private/` folder is blocked from direct browser access by `server.js`; do not place paid files in `assets/` or any public route.
+
+10. Redeploy Render after adding environment variables or delivery files.
+11. Test with Stripe test mode and the test card `4242 4242 4242 4242`.
+
+Stripe fulfillment is webhook-based. The thank-you page tells buyers to check email, but the email is only sent after Stripe confirms payment through a signed webhook.
 
 ### SEO and Launch Files
 

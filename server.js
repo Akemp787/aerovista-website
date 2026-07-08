@@ -13,7 +13,18 @@ const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || "contact@aerovistaanaly
 const CONTACT_FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "AeroVista Analytics <contact@aerovistaanalytics.com>";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const ROOT = __dirname;
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
+const MEMBER_KIT_PRODUCT_KEY = "member_data_readiness_kit";
+const MEMBER_KIT_NAME = "Member Data Readiness Kit";
+const MEMBER_KIT_PRICE_CENTS = Number(process.env.MEMBER_KIT_PRICE_CENTS || 1700);
+const MEMBER_KIT_PRICE_ID = process.env.MEMBER_KIT_STRIPE_PRICE_ID || "";
+const MEMBER_KIT_DELIVERY_DIR =
+  process.env.MEMBER_KIT_DELIVERY_DIR || path.join(ROOT, "private", "downloads", "member-data-readiness-kit");
+const MEMBER_KIT_FULFILLMENT_STORE = path.join(ROOT, "storage", "fulfillments", "member-kit-sessions.json");
+const STRIPE_WEBHOOK_TOLERANCE_SECONDS = 300;
 const MAX_BODY_BYTES = 24 * 1024;
+const MAX_WEBHOOK_BYTES = 256 * 1024;
 const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT = 6;
 const MAX_RATE_BUCKETS = 10000;
@@ -34,6 +45,12 @@ const allowedServices = new Set([
 ]);
 
 const allowedTimelines = new Set(["Flexible", "ASAP", "2-4 weeks", "1-3 months", "3+ months"]);
+
+const memberKitDeliveryFileOptions = [
+  { filename: "Member_Data_Readiness_Kit.zip" },
+  { filename: "Member_Data_Readiness_Kit_Guide.pdf" },
+  { filename: "Member_Data_Readiness_Kit_Workbook.xlsx" },
+];
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -228,6 +245,26 @@ function readJsonBody(req) {
   });
 }
 
+function readRawBody(req, maxBytes = MAX_WEBHOOK_BYTES) {
+  return new Promise((resolve, reject) => {
+    let size = 0;
+    const chunks = [];
+
+    req.on("data", (chunk) => {
+      size += chunk.length;
+      if (size > maxBytes) {
+        reject(Object.assign(new Error("Request body too large."), { status: 413 }));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+
+    req.on("end", () => resolve(Buffer.concat(chunks)));
+    req.on("error", reject);
+  });
+}
+
 function clean(value, maxLength) {
   return String(value || "")
     .replace(/[\u0000-\u001f\u007f]/g, " ")
@@ -315,34 +352,27 @@ function buildInquiryEmail(inquiry, record) {
   return { subject, text, html };
 }
 
-async function sendInquiryEmail(inquiry, record) {
+async function sendResendEmail(payload, idempotencyKey) {
   if (!RESEND_API_KEY) {
     const error = new Error("Email service is not configured.");
     error.status = 503;
     throw error;
   }
 
-  const email = buildInquiryEmail(inquiry, record);
+  const headers = {
+    Authorization: `Bearer ${RESEND_API_KEY}`,
+    "Content-Type": "application/json",
+    "User-Agent": "aerovista-analytics-website/1.0",
+  };
+
+  if (idempotencyKey) {
+    headers["Idempotency-Key"] = idempotencyKey;
+  }
+
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-      "User-Agent": "aerovista-analytics-website/1.0",
-      "Idempotency-Key": record.id,
-    },
-    body: JSON.stringify({
-      from: CONTACT_FROM_EMAIL,
-      to: [CONTACT_TO_EMAIL],
-      reply_to: inquiry.email,
-      subject: email.subject,
-      text: email.text,
-      html: email.html,
-      tags: [
-        { name: "source", value: "website" },
-        { name: "request_type", value: inquiry.requestType.toLowerCase().replace(/\s+/g, "_") },
-      ],
-    }),
+    headers,
+    body: JSON.stringify(payload),
   });
 
   let result = {};
@@ -363,6 +393,25 @@ async function sendInquiryEmail(inquiry, record) {
   return result.id;
 }
 
+async function sendInquiryEmail(inquiry, record) {
+  const email = buildInquiryEmail(inquiry, record);
+  return sendResendEmail(
+    {
+      from: CONTACT_FROM_EMAIL,
+      to: [CONTACT_TO_EMAIL],
+      reply_to: inquiry.email,
+      subject: email.subject,
+      text: email.text,
+      html: email.html,
+      tags: [
+        { name: "source", value: "website" },
+        { name: "request_type", value: inquiry.requestType.toLowerCase().replace(/\s+/g, "_") },
+      ],
+    },
+    record.id
+  );
+}
+
 function logDeliveryError(error, record) {
   console.error(
     JSON.stringify({
@@ -375,6 +424,382 @@ function logDeliveryError(error, record) {
       createdAt: new Date().toISOString(),
     })
   );
+}
+
+function publicUrl(pathname) {
+  return new URL(pathname, PUBLIC_SITE_URL.endsWith("/") ? PUBLIC_SITE_URL : `${PUBLIC_SITE_URL}/`).toString();
+}
+
+function stripeFormBody(entries) {
+  const body = new URLSearchParams();
+  for (const [key, value] of entries) {
+    if (value !== undefined && value !== null && value !== "") {
+      body.append(key, String(value));
+    }
+  }
+  return body;
+}
+
+async function stripeApiPost(endpoint, entries, idempotencyKey) {
+  if (!STRIPE_SECRET_KEY) {
+    const error = new Error("Stripe is not configured.");
+    error.status = 503;
+    throw error;
+  }
+
+  const headers = {
+    Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
+    "Content-Type": "application/x-www-form-urlencoded",
+    "User-Agent": "aerovista-analytics-website/1.0",
+  };
+  if (idempotencyKey) headers["Idempotency-Key"] = idempotencyKey;
+
+  const response = await fetch(`https://api.stripe.com${endpoint}`, {
+    method: "POST",
+    headers,
+    body: stripeFormBody(entries).toString(),
+  });
+
+  let result = {};
+  try {
+    result = await response.json();
+  } catch {
+    result = {};
+  }
+
+  if (!response.ok) {
+    const error = new Error("Stripe request failed.");
+    error.status = response.status >= 500 ? 502 : 500;
+    error.providerStatus = response.status;
+    error.providerMessage = result.error?.message || result.error?.type || "unknown";
+    throw error;
+  }
+
+  return result;
+}
+
+async function stripeApiGet(endpoint, entries = []) {
+  if (!STRIPE_SECRET_KEY) {
+    const error = new Error("Stripe is not configured.");
+    error.status = 503;
+    throw error;
+  }
+
+  const query = stripeFormBody(entries).toString();
+  const response = await fetch(`https://api.stripe.com${endpoint}${query ? `?${query}` : ""}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
+      "User-Agent": "aerovista-analytics-website/1.0",
+    },
+  });
+
+  let result = {};
+  try {
+    result = await response.json();
+  } catch {
+    result = {};
+  }
+
+  if (!response.ok) {
+    const error = new Error("Stripe request failed.");
+    error.status = response.status >= 500 ? 502 : 500;
+    error.providerStatus = response.status;
+    error.providerMessage = result.error?.message || result.error?.type || "unknown";
+    throw error;
+  }
+
+  return result;
+}
+
+function buildMemberKitCheckoutEntries() {
+  const entries = [
+    ["mode", "payment"],
+    ["client_reference_id", crypto.randomUUID()],
+    ["success_url", publicUrl("resources/member-data-readiness-kit/thank-you?session_id={CHECKOUT_SESSION_ID}")],
+    ["cancel_url", publicUrl("resources/member-data-readiness-kit?purchase=cancelled")],
+    ["customer_creation", "always"],
+    ["billing_address_collection", "auto"],
+    ["submit_type", "pay"],
+    ["line_items[0][quantity]", "1"],
+    ["metadata[product]", MEMBER_KIT_PRODUCT_KEY],
+    ["metadata[product_name]", MEMBER_KIT_NAME],
+  ];
+
+  if (MEMBER_KIT_PRICE_ID) {
+    entries.push(["line_items[0][price]", MEMBER_KIT_PRICE_ID]);
+  } else {
+    entries.push(
+      ["line_items[0][price_data][currency]", "usd"],
+      ["line_items[0][price_data][unit_amount]", MEMBER_KIT_PRICE_CENTS],
+      ["line_items[0][price_data][product_data][name]", MEMBER_KIT_NAME],
+      [
+        "line_items[0][price_data][product_data][description]",
+        "PDF guide and Excel workbook for membership data readiness.",
+      ]
+    );
+  }
+
+  return entries;
+}
+
+async function handleMemberKitCheckout(req, res) {
+  if (!isAllowedOrigin(req.headers.origin)) {
+    sendText(res, 403, "Request origin is not allowed.");
+    return;
+  }
+
+  if (req.headers["sec-fetch-site"] === "cross-site") {
+    sendText(res, 403, "Cross-site requests are not allowed.");
+    return;
+  }
+
+  if (!rateLimit(req)) {
+    sendText(res, 429, "Too many requests. Please try again later.");
+    return;
+  }
+
+  try {
+    const session = await stripeApiPost("/v1/checkout/sessions", buildMemberKitCheckoutEntries(), crypto.randomUUID());
+    if (!session.url || !String(session.url).startsWith("https://checkout.stripe.com/")) {
+      throw new Error("Stripe did not return a checkout URL.");
+    }
+
+    res.writeHead(303, {
+      ...securityHeaders(),
+      Location: session.url,
+      "Cache-Control": "no-store",
+    });
+    res.end();
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        level: "error",
+        event: "member_kit_checkout_create_failed",
+        providerStatus: error.providerStatus || null,
+        providerMessage: error.providerMessage || error.message || "unknown",
+        createdAt: new Date().toISOString(),
+      })
+    );
+    sendText(res, error.status || 502, "Checkout is not available right now. Please email contact@aerovistaanalytics.com.");
+  }
+}
+
+function parseStripeSignatureHeader(signatureHeader = "") {
+  const parsed = {};
+  for (const part of String(signatureHeader).split(",")) {
+    const [key, value] = part.split("=");
+    if (!key || !value) continue;
+    if (!parsed[key]) parsed[key] = [];
+    parsed[key].push(value);
+  }
+  return parsed;
+}
+
+function verifyStripeWebhookSignature(rawBody, signatureHeader) {
+  if (!STRIPE_WEBHOOK_SECRET) {
+    const error = new Error("Stripe webhook secret is not configured.");
+    error.status = 503;
+    throw error;
+  }
+
+  const parsed = parseStripeSignatureHeader(signatureHeader);
+  const timestamp = Number(parsed.t?.[0] || 0);
+  const signatures = parsed.v1 || [];
+  if (!timestamp || !signatures.length) {
+    const error = new Error("Invalid Stripe signature header.");
+    error.status = 400;
+    throw error;
+  }
+
+  const age = Math.abs(Math.floor(Date.now() / 1000) - timestamp);
+  if (age > STRIPE_WEBHOOK_TOLERANCE_SECONDS) {
+    const error = new Error("Stripe webhook timestamp is outside tolerance.");
+    error.status = 400;
+    throw error;
+  }
+
+  const signedPayload = `${timestamp}.${rawBody.toString("utf8")}`;
+  const expected = crypto.createHmac("sha256", STRIPE_WEBHOOK_SECRET).update(signedPayload).digest("hex");
+  const expectedBuffer = Buffer.from(expected, "hex");
+
+  const isValid = signatures.some((signature) => {
+    const signatureBuffer = Buffer.from(signature, "hex");
+    return signatureBuffer.length === expectedBuffer.length && crypto.timingSafeEqual(signatureBuffer, expectedBuffer);
+  });
+
+  if (!isValid) {
+    const error = new Error("Stripe webhook signature verification failed.");
+    error.status = 400;
+    throw error;
+  }
+}
+
+function loadFulfillmentStore() {
+  try {
+    return JSON.parse(fs.readFileSync(MEMBER_KIT_FULFILLMENT_STORE, "utf8"));
+  } catch {
+    return {};
+  }
+}
+
+function saveFulfillmentStore(store) {
+  fs.mkdirSync(path.dirname(MEMBER_KIT_FULFILLMENT_STORE), { recursive: true });
+  fs.writeFileSync(MEMBER_KIT_FULFILLMENT_STORE, JSON.stringify(store, null, 2));
+}
+
+function loadMemberKitAttachments() {
+  const zipPath = path.join(MEMBER_KIT_DELIVERY_DIR, "Member_Data_Readiness_Kit.zip");
+  const selectedFiles = fs.existsSync(zipPath)
+    ? [{ filename: "Member_Data_Readiness_Kit.zip" }]
+    : memberKitDeliveryFileOptions.filter((file) => fs.existsSync(path.join(MEMBER_KIT_DELIVERY_DIR, file.filename)));
+
+  if (!selectedFiles.length) {
+    const error = new Error("Member Data Readiness Kit delivery files are missing.");
+    error.status = 503;
+    throw error;
+  }
+
+  let totalBytes = 0;
+  const attachments = selectedFiles.map((file) => {
+    const filePath = path.join(MEMBER_KIT_DELIVERY_DIR, file.filename);
+    const content = fs.readFileSync(filePath);
+    totalBytes += content.length;
+    return {
+      filename: file.filename,
+      content: content.toString("base64"),
+    };
+  });
+
+  if (totalBytes > 28 * 1024 * 1024) {
+    const error = new Error("Member Data Readiness Kit attachments are too large for email delivery.");
+    error.status = 503;
+    throw error;
+  }
+
+  return attachments;
+}
+
+function customerEmailFromSession(session) {
+  return clean(session.customer_details?.email || session.customer_email, 180).toLowerCase();
+}
+
+async function sendMemberKitDeliveryEmail(session) {
+  const buyerEmail = customerEmailFromSession(session);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(buyerEmail)) {
+    const error = new Error("Stripe session is missing a valid buyer email.");
+    error.status = 400;
+    throw error;
+  }
+
+  const attachments = loadMemberKitAttachments();
+  const text = [
+    "Thank you for purchasing the Member Data Readiness Kit.",
+    "",
+    "Your files are attached to this email. The kit is designed to help you review source files, active/lapsed status, renewal dates, payment mismatches, duplicate records, and migration readiness before leadership depends on the numbers.",
+    "",
+    "If you want help applying this to your own data, you can book a Membership Data Diagnostic here:",
+    publicUrl("contact.html?service=Membership%20Data%20Diagnostic"),
+    "",
+    "AeroVista Analytics",
+    PUBLIC_CONTACT_EMAIL,
+  ].join("\n");
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;color:#071936;line-height:1.6;">
+      <h1 style="font-size:20px;margin:0 0 14px;">Your Member Data Readiness Kit</h1>
+      <p>Thank you for purchasing the Member Data Readiness Kit. Your files are attached to this email.</p>
+      <p>The kit is designed to help you review source files, active/lapsed status, renewal dates, payment mismatches, duplicate records, and migration readiness before leadership depends on the numbers.</p>
+      <p>If you want help applying this to your own data, you can <a href="${escapeHtml(publicUrl("contact.html?service=Membership%20Data%20Diagnostic"))}">book a Membership Data Diagnostic</a>.</p>
+      <p style="margin-top:20px;">AeroVista Analytics<br><a href="mailto:${escapeHtml(PUBLIC_CONTACT_EMAIL)}">${escapeHtml(PUBLIC_CONTACT_EMAIL)}</a></p>
+    </div>
+  `;
+
+  return sendResendEmail(
+    {
+      from: CONTACT_FROM_EMAIL,
+      to: [buyerEmail],
+      bcc: [CONTACT_TO_EMAIL],
+      reply_to: PUBLIC_CONTACT_EMAIL,
+      subject: "Your Member Data Readiness Kit",
+      text,
+      html,
+      attachments,
+      tags: [
+        { name: "source", value: "stripe" },
+        { name: "product", value: MEMBER_KIT_PRODUCT_KEY },
+      ],
+    },
+    `member-kit-${session.id}`
+  );
+}
+
+async function fulfillMemberKitCheckout(sessionId) {
+  const store = loadFulfillmentStore();
+  if (store[sessionId]?.status === "delivered") {
+    return store[sessionId];
+  }
+
+  const session = await stripeApiGet(`/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, [
+    ["expand[]", "line_items"],
+  ]);
+
+  if (session.metadata?.product !== MEMBER_KIT_PRODUCT_KEY) {
+    return { status: "ignored" };
+  }
+
+  if (!["paid", "no_payment_required"].includes(session.payment_status)) {
+    return { status: "not_paid", paymentStatus: session.payment_status };
+  }
+
+  const emailId = await sendMemberKitDeliveryEmail(session);
+  const record = {
+    status: "delivered",
+    sessionId,
+    email: customerEmailFromSession(session),
+    amountTotal: session.amount_total || null,
+    currency: session.currency || "usd",
+    emailId,
+    deliveredAt: new Date().toISOString(),
+  };
+  store[sessionId] = record;
+  saveFulfillmentStore(store);
+  return record;
+}
+
+async function handleStripeWebhook(req, res) {
+  try {
+    const rawBody = await readRawBody(req, MAX_WEBHOOK_BYTES);
+    verifyStripeWebhookSignature(rawBody, req.headers["stripe-signature"]);
+    const event = JSON.parse(rawBody.toString("utf8"));
+
+    if (event.type === "checkout.session.completed" || event.type === "checkout.session.async_payment_succeeded") {
+      await fulfillMemberKitCheckout(event.data.object.id);
+    }
+
+    if (event.type === "checkout.session.async_payment_failed") {
+      console.warn(
+        JSON.stringify({
+          level: "warn",
+          event: "member_kit_async_payment_failed",
+          sessionId: event.data?.object?.id || null,
+          createdAt: new Date().toISOString(),
+        })
+      );
+    }
+
+    sendJson(res, 200, { received: true });
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        level: "error",
+        event: "stripe_webhook_failed",
+        providerMessage: error.message || "unknown",
+        createdAt: new Date().toISOString(),
+      })
+    );
+    sendText(res, error.status || 400, "Webhook error");
+  }
 }
 
 async function handleInquiry(req, res) {
@@ -480,7 +905,7 @@ function serveStatic(req, res, pathname) {
   if (
     relative.startsWith("..") ||
     path.isAbsolute(relative) ||
-    ["server.js", "package.json", ".env", ".env.example", "storage", "work"].includes(firstSegment)
+    ["server.js", "package.json", ".env", ".env.example", "storage", "private", "work"].includes(firstSegment)
   ) {
     sendText(res, 404, "Not found");
     return;
@@ -533,6 +958,16 @@ const server = http.createServer((req, res) => {
 
   if (req.method === "POST" && url.pathname === "/api/inquiries") {
     handleInquiry(req, res);
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/api/member-kit/checkout") {
+    handleMemberKitCheckout(req, res);
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/api/stripe/webhook") {
+    handleStripeWebhook(req, res);
     return;
   }
 

@@ -327,7 +327,9 @@ svg {
   justify-content: center;
   min-height: 48px;
   padding: 0 26px;
+  border: 0;
   border-radius: 4px;
+  cursor: pointer;
   font-size: 14px;
   font-weight: 850;
   transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
@@ -709,6 +711,14 @@ svg {
   gap: 18px;
   align-items: center;
   margin-bottom: 18px;
+}
+
+.checkout-form {
+  margin: 0;
+}
+
+.purchase-note {
+  margin-bottom: 10px;
 }
 
 .page-hero .product-trust-note {
