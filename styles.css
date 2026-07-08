@@ -298,6 +298,39 @@ svg {
   line-height: 1.75;
 }
 
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 680px;
+  margin: 0 0 26px;
+}
+
+.hero-proof div {
+  min-width: 142px;
+  padding: 10px 13px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(140, 196, 255, 0.28);
+  border-radius: 4px;
+}
+
+.hero-proof strong {
+  display: block;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 19px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.hero-proof span {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 .hero-actions {
   display: flex;
   gap: 22px;
@@ -563,7 +596,7 @@ svg {
 
 .offer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   margin-top: 34px;
 }
@@ -619,6 +652,44 @@ svg {
 
 .offer-card .btn {
   margin-top: auto;
+}
+
+.offer-card .resource-badge {
+  align-self: flex-start;
+  margin-bottom: 16px;
+}
+
+.platform-note,
+.offer-footnote {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.offer-footnote {
+  margin-top: 14px;
+}
+
+.offer-addon-card {
+  max-width: 760px;
+  min-height: auto;
+  margin: 22px auto 0;
+}
+
+.centered-intro {
+  max-width: 760px;
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+.section-heading .section-intro {
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.7;
+  text-transform: none;
 }
 
 .resources-section {
