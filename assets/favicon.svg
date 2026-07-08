@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AeroVista Analytics">
-  <rect width="64" height="64" rx="10" fill="#071936"/>
-  <path d="M31.7 10 12 54h10.6l4-9.8h18.2l4 9.8H60L39.7 10h-8zm-1.2 24.5 5.2-12.6 5.3 12.6H30.5z" fill="#ffffff"/>
-  <path d="M8 42c13.8-8.9 28.5-15.4 48-19.5-16.7 7.2-30.2 15.4-40.2 25.2L8 42z" fill="#6fa8d8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AeroVista Analytics">
+  <rect width="128" height="128" rx="24" fill="#020B22"/>
+  <path d="M64 14 114 64 64 114 14 64 64 14Z" fill="#fff"/>
+  <path d="M64 24 24 64l20 20 20-20V24Z" fill="#061A42"/>
+  <path d="M64 24v40l20 20 20-20-40-40Z" fill="#0072FF"/>
+  <path d="M53 83h10v22L53 95V83Z" fill="#00A3FF"/>
+  <path d="M68 69h10v36l-10 10V69Z" fill="#178BFF"/>
+  <path d="M83 58h10v32L83 100V58Z" fill="#006BEE"/>
 </svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 92" role="img" aria-label="AeroVista Analytics">
+  <defs>
+    <linearGradient id="avBlue" x1="28" y1="74" x2="78" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00A3FF"/>
+      <stop offset="1" stop-color="#0072FF"/>
+    </linearGradient>
+    <linearGradient id="avDark" x1="18" y1="70" x2="56" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061A42"/>
+      <stop offset="1" stop-color="#0B2B6B"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(6 8)">
+    <path d="M40 0 80 40 40 80 0 40 40 0Z" fill="#fff"/>
+    <path d="M40 9 9 40l16 16 15-16V9Z" fill="url(#avDark)"/>
+    <path d="M40 9v31l16 16 15-16L40 9Z" fill="url(#avBlue)"/>
+    <path d="M32 55h7v17l-7-7V55Z" fill="#00A3FF"/>
+    <path d="M44 45h7v27l-7 8V45Z" fill="#178BFF"/>
+    <path d="M56 36h7v24l-7 8V36Z" fill="#006BEE"/>
+  </g>
+  <text x="102" y="43" fill="#061A42" font-family="Aptos Display, Segoe UI, Arial, sans-serif" font-size="32" font-weight="800" letter-spacing="-.5">AeroVista</text>
+  <text x="103" y="69" fill="#0072FF" font-family="Aptos, Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing=".8">Analytics</text>
+</svg>

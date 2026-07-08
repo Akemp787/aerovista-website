@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AeroVista Analytics mark">
+  <defs>
+    <linearGradient id="avBlue" x1="32" y1="96" x2="98" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00A3FF"/>
+      <stop offset="1" stop-color="#0072FF"/>
+    </linearGradient>
+    <linearGradient id="avDark" x1="24" y1="92" x2="73" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061A42"/>
+      <stop offset="1" stop-color="#0B2B6B"/>
+    </linearGradient>
+  </defs>
+  <path d="M64 12 116 64 64 116 12 64 64 12Z" fill="#fff"/>
+  <path d="M64 22 22 64 43 85 64 64V22Z" fill="url(#avDark)"/>
+  <path d="M64 22v42l21 21 21-21-42-42Z" fill="url(#avBlue)"/>
+  <path d="M53 83h10v23L53 96V83Z" fill="#00A3FF"/>
+  <path d="M68 69h10v37l-10 10V69Z" fill="#178BFF"/>
+  <path d="M83 58h10v33L83 101V58Z" fill="#006BEE"/>
+</svg>

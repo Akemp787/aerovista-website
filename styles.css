@@ -1,12 +1,13 @@
 :root {
-  --ink: #071936;
+  --ink: #061a42;
   --muted: #4b5b72;
-  --blue: #0065e8;
-  --blue-dark: #003b8f;
-  --ice: #eef5ff;
-  --line: #d9e4f0;
-  --navy: #00152d;
-  --navy-2: #00244b;
+  --blue: #0072ff;
+  --blue-dark: #0b2b6b;
+  --cyan: #00a3ff;
+  --ice: #eef7ff;
+  --line: #d6e6f6;
+  --navy: #020b22;
+  --navy-2: #061a42;
   --white: #ffffff;
   --shadow: 0 12px 35px rgba(12, 35, 64, 0.11);
   --font-heading: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
@@ -141,9 +142,9 @@ svg {
   top: 0;
   z-index: 20;
   height: 80px;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid #edf1f6;
-  box-shadow: 0 2px 14px rgba(7, 25, 54, 0.06);
+  box-shadow: 0 2px 18px rgba(2, 11, 34, 0.08);
   backdrop-filter: blur(10px);
 }
 
@@ -164,7 +165,7 @@ svg {
 }
 
 .brand img {
-  width: 210px;
+  width: 224px;
   height: 54px;
   object-fit: contain;
 }
@@ -216,9 +217,9 @@ svg {
   min-height: 42px;
   padding: 0 22px;
   color: #ffffff;
-  background: #011936;
+  background: linear-gradient(135deg, #061a42, #0072ff);
   border-radius: 4px;
-  box-shadow: 0 8px 20px rgba(1, 25, 54, 0.18);
+  box-shadow: 0 10px 24px rgba(0, 114, 255, 0.18);
   font-size: 14px;
   font-weight: 850;
   white-space: nowrap;
@@ -234,8 +235,8 @@ svg {
   overflow: hidden;
   color: #ffffff;
   background:
-    linear-gradient(90deg, rgba(0, 20, 43, 0.99) 0%, rgba(0, 23, 50, 0.98) 32%, rgba(0, 29, 63, 0.56) 63%, rgba(0, 17, 35, 0.5) 100%),
-    #00152d;
+    linear-gradient(90deg, rgba(2, 11, 34, 0.99) 0%, rgba(4, 18, 49, 0.97) 38%, rgba(4, 23, 64, 0.68) 66%, rgba(2, 11, 34, 0.72) 100%),
+    #020b22;
 }
 
 .hero-art {
@@ -243,8 +244,8 @@ svg {
   inset: 0 0 0 auto;
   width: 68%;
   background-image:
-    linear-gradient(90deg, rgba(0, 21, 45, 0.92), rgba(0, 21, 45, 0.08) 28%, rgba(0, 21, 45, 0) 100%),
-    url("assets/hero-dashboard.png");
+    linear-gradient(90deg, rgba(2, 11, 34, 0.94), rgba(2, 11, 34, 0.18) 34%, rgba(2, 11, 34, 0) 100%),
+    url("assets/aerovista-data-wave.svg");
   background-position: center right;
   background-size: cover;
   opacity: 0.9;
@@ -264,7 +265,7 @@ svg {
 
 .hero-kicker {
   margin: 0 0 12px;
-  color: #8cc4ff;
+  color: #7ed7ff;
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 1.5px;
@@ -381,8 +382,8 @@ svg {
 
 .btn-primary {
   color: #ffffff;
-  background: linear-gradient(180deg, #0871f2, #0058d4);
-  box-shadow: 0 12px 28px rgba(0, 101, 232, 0.22);
+  background: linear-gradient(180deg, #0094ff, #0065f0);
+  box-shadow: 0 12px 28px rgba(0, 114, 255, 0.24);
 }
 
 .btn-secondary {
@@ -402,12 +403,12 @@ svg {
   min-height: 33px;
   margin-top: 26px;
   color: #ffffff;
-  background: linear-gradient(180deg, #0d75ff, #0058d4);
+  background: linear-gradient(180deg, #0094ff, #0065f0);
 }
 
 .trust-strip {
   color: #ffffff;
-  background: linear-gradient(90deg, #002047, #003360 49%, #001c3d);
+  background: linear-gradient(90deg, #020b22, #06265a 48%, #041331);
 }
 
 .trust-grid {
@@ -724,8 +725,8 @@ svg {
   margin: 0 0 16px;
   padding: 6px 10px;
   color: var(--blue);
-  background: #edf5ff;
-  border: 1px solid #c9ddf8;
+  background: #edf8ff;
+  border: 1px solid #b8ddff;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 900;
@@ -879,7 +880,7 @@ svg {
   align-items: center;
   padding: 38px;
   color: #ffffff;
-  background: linear-gradient(90deg, #001a39, #003260);
+  background: linear-gradient(90deg, #020b22, #063176);
   border-radius: 5px;
   box-shadow: var(--shadow);
 }
@@ -1423,7 +1424,7 @@ svg {
 
 .cta-band {
   color: #ffffff;
-  background: linear-gradient(90deg, #001932, #002b56 54%, #00172f);
+  background: linear-gradient(90deg, #020b22, #062f73 54%, #020b22);
   border-bottom: 1px solid rgba(255, 255, 255, 0.24);
 }
 
@@ -1678,8 +1679,8 @@ svg {
   overflow: hidden;
   color: #ffffff;
   background:
-    linear-gradient(90deg, rgba(0, 20, 43, 0.98), rgba(0, 35, 76, 0.86)),
-    url("assets/hero-dashboard.png");
+    linear-gradient(90deg, rgba(2, 11, 34, 0.98), rgba(4, 24, 66, 0.86)),
+    url("assets/aerovista-data-wave.svg");
   background-position: center right;
   background-size: cover;
 }
@@ -1922,7 +1923,7 @@ svg {
 .case-study-facts {
   padding: 28px;
   color: #ffffff;
-  background: linear-gradient(145deg, #00152d, #002c5d);
+  background: linear-gradient(145deg, #020b22, #063176);
   border-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -2075,7 +2076,7 @@ svg {
 
 .site-footer {
   color: #ffffff;
-  background: linear-gradient(90deg, #001932, #002b56 54%, #00172f);
+  background: linear-gradient(90deg, #020b22, #061a42 54%, #020b22);
 }
 
 .footer-grid {
@@ -2533,6 +2534,22 @@ svg {
     min-width: 0;
   }
 
+  .hero-proof {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-proof div {
+    min-width: 0;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
   .hero-copy,
   .trust-item,
   .service-card,
@@ -2590,7 +2607,7 @@ svg {
     max-width: 100%;
     font-size: 28px;
     overflow-wrap: anywhere;
-    text-wrap: wrap;
+    white-space: normal;
   }
 
   .hero p {
@@ -2643,6 +2660,17 @@ svg {
   .cta-inner,
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .trust-item {
+    grid-template-columns: 56px minmax(0, 1fr);
+    min-width: 0;
+  }
+
+  .trust-item h2,
+  .trust-item p {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .case-study-metrics {
