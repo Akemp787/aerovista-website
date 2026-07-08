@@ -462,7 +462,13 @@ function serveStatic(req, res, pathname) {
     return;
   }
 
-  if (requestedPath === "/") requestedPath = "/index.html";
+  if (requestedPath === "/") {
+    requestedPath = "/index.html";
+  } else if (requestedPath.endsWith("/")) {
+    requestedPath += "index.html";
+  } else if (!path.extname(requestedPath)) {
+    requestedPath += "/index.html";
+  }
 
   const normalized = path.normalize(requestedPath).replace(/^(\.\.[/\\])+/, "");
   const filePath = path.join(ROOT, normalized);
