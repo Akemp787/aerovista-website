@@ -39,6 +39,10 @@ body,
 .problem-card,
 .offer-grid,
 .offer-card,
+.resources-layout,
+.resource-card,
+.resource-grid,
+.kit-list,
 .philosophy-card,
 .footer-grid > * {
   min-width: 0;
@@ -613,6 +617,211 @@ svg {
 
 .offer-card .btn {
   margin-top: auto;
+}
+
+.resources-section {
+  background: #ffffff;
+}
+
+.resources-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.section-intro {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.resource-card {
+  padding: 34px;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.resource-badge {
+  display: inline-flex;
+  margin: 0 0 16px;
+  padding: 6px 10px;
+  color: var(--blue);
+  background: #edf5ff;
+  border: 1px solid #c9ddf8;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.resource-card h3 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 850;
+}
+
+.resource-card p {
+  margin: 0;
+  color: #1c2b43;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.resource-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 22px;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.resource-actions .text-link {
+  max-width: 330px;
+  margin-top: 0;
+}
+
+.product-hero .page-hero-inner {
+  max-width: 830px;
+}
+
+.page-hero .product-hero-copy {
+  max-width: 700px;
+  margin: 0 0 28px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.7;
+  text-transform: none;
+}
+
+.product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.page-hero .product-trust-note {
+  max-width: 680px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.7;
+  text-transform: none;
+}
+
+.resource-detail-section {
+  background: linear-gradient(90deg, #f6f9fd, #ffffff 48%, #f4f8fe);
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.resource-detail-card,
+.included-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+}
+
+.resource-detail-card {
+  min-height: 104px;
+  padding: 24px 26px;
+  color: #1c2b43;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.kit-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kit-list li {
+  position: relative;
+  min-height: 58px;
+  padding: 16px 18px 16px 42px;
+  color: #1c2b43;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(14, 52, 93, 0.04);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.kit-list li::before {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  color: var(--blue);
+  content: ">";
+  font-weight: 900;
+}
+
+.resource-story {
+  max-width: 900px;
+}
+
+.resource-story p {
+  margin: 0 0 18px;
+  color: #1c2b43;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.product-cta-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 34px;
+  align-items: center;
+  padding: 38px;
+  color: #ffffff;
+  background: linear-gradient(90deg, #001a39, #003260);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.product-cta-card h2 {
+  margin: 0 0 12px;
+  font-size: 30px;
+  line-height: 1.18;
+}
+
+.product-cta-card p {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.product-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-end;
 }
 
 .philosophy-section {
@@ -2122,6 +2331,7 @@ svg {
   .about-grid,
   .request-grid,
   .problem-grid,
+  .resources-layout,
   .case-study-layout,
   .detail-grid,
   .plan-grid,
@@ -2134,9 +2344,19 @@ svg {
   }
 
   .industry-list,
+  .resource-grid,
+  .kit-list,
   .process-steps,
   .timeline-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-cta-card {
+    grid-template-columns: 1fr;
+  }
+
+  .product-cta-actions {
+    justify-content: flex-start;
   }
 
   .timeline-grid article::after {
@@ -2237,6 +2457,14 @@ svg {
   .service-card,
   .service-card p,
   .problem-card,
+  .resource-card,
+  .resource-card p,
+  .resource-detail-card,
+  .kit-list li,
+  .resource-story,
+  .resource-story p,
+  .product-cta-card,
+  .product-cta-card p,
   .problem-card p,
   .offer-card,
   .offer-card p,
@@ -2314,6 +2542,10 @@ svg {
   .trust-grid,
   .service-grid,
   .offer-grid,
+  .resources-layout,
+  .resource-grid,
+  .kit-list,
+  .product-cta-card,
   .case-card,
   .metric-row,
   .credential-row,
@@ -2372,8 +2604,35 @@ svg {
   }
 
   .problem-card,
+  .resource-card,
   .philosophy-card {
     padding: 24px 22px;
+  }
+
+  .resource-actions {
+    align-items: stretch;
+  }
+
+  .resource-actions .text-link {
+    max-width: 100%;
+  }
+
+  .resource-detail-card {
+    min-height: auto;
+    padding: 20px 22px;
+  }
+
+  .product-actions,
+  .product-cta-actions {
+    align-items: stretch;
+  }
+
+  .product-cta-card {
+    padding: 28px 22px;
+  }
+
+  .product-cta-card h2 {
+    font-size: 24px;
   }
 
   .philosophy-card h2 {
