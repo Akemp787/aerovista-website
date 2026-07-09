@@ -123,7 +123,9 @@ if (requestedType) {
   }
 }
 
-document.querySelectorAll(".contact-form").forEach((form) => {
+const contactForms = document.querySelectorAll(".contact-form");
+
+contactForms.forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
@@ -131,4 +133,6 @@ document.querySelectorAll(".contact-form").forEach((form) => {
   });
 });
 
-loadCsrfToken();
+if (contactForms.length > 0) {
+  loadCsrfToken();
+}

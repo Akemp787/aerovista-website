@@ -677,6 +677,32 @@ svg {
   margin: 22px auto 0;
 }
 
+.homepage-note {
+  display: flex;
+  max-width: 920px;
+  margin: 24px auto 0;
+  padding: 18px 22px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #f6faff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+
+.homepage-note p {
+  max-width: 620px;
+  margin: 0;
+  color: #253650;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.homepage-note .text-link {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .centered-intro {
   max-width: 760px;
   margin: 14px auto 0;
@@ -2738,6 +2764,16 @@ svg {
 
   .product-cta-card {
     padding: 28px 22px;
+  }
+
+  .homepage-note {
+    display: grid;
+    padding: 20px 22px;
+    gap: 10px;
+  }
+
+  .homepage-note .text-link {
+    white-space: normal;
   }
 
   .product-cta-card h2 {
