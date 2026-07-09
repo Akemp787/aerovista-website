@@ -24,7 +24,7 @@
     <meta name="twitter:image" content="https://aerovistaanalytics.com/assets/aerovista-data-wave.svg">
     <link rel="icon" href="assets/favicon.png" type="image/png">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="stylesheet" href="styles.css?v=20260707">
+    <link rel="stylesheet" href="styles.css?v=20260709-render">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -55,12 +55,12 @@
       }
     </script>
   </head>
-  <body>
+  <body class="home-render">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="index.html" aria-label="AeroVista Analytics home">
-          <img src="assets/aerovista-logo-exact.png" alt="AeroVista Analytics">
+          <img src="assets/aerovista-logo-exact-light.png" alt="AeroVista Analytics">
         </a>
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">
           <span></span>
@@ -68,274 +68,148 @@
           <span></span>
         </button>
         <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-          <a class="active" href="index.html">Home</a>
           <a href="services.html">Services</a>
-          <a href="plans.html">Engagements</a>
-          <a href="about.html">About</a>
+          <a href="plans.html">Solutions</a>
+          <a href="process.html">Our Approach</a>
           <a href="case-studies.html">Case Studies</a>
-          <a href="process.html">Process</a>
-          <a href="resources/member-data-readiness-kit">Resources</a>
-          <a href="contact.html">Contact</a>
+          <a href="about.html">About Us</a>
         </nav>
         <a class="header-cta" href="contact.html">Book a Consultation</a>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="hero hero-premium">
-        <div class="hero-art" aria-hidden="true"></div>
-        <div class="container hero-content">
-          <div class="hero-copy">
-            <p class="hero-kicker">Evidence-Based Data Consulting</p>
-            <h1><span>Trust</span> Your Data.</h1>
-            <p>
-              Evidence-based data consulting powered by Aero, our proprietary data investigation
-              platform.
+      <section class="render-hero">
+        <div class="container render-hero-grid">
+          <div class="render-hero-copy">
+            <p class="render-kicker">Evidence-Based Data Consulting</p>
+            <h1>Trust Your Data.</h1>
+            <p class="render-subhead">Evidence-based data consulting powered by <strong>Aero.</strong></p>
+            <p class="render-body">
+              We help organizations investigate, validate, and understand their data so they can
+              make confident business decisions.
             </p>
             <div class="hero-actions" aria-label="Primary actions">
               <a class="btn btn-primary" href="contact.html">
                 Book a Consultation
                 <span aria-hidden="true">-&gt;</span>
               </a>
-              <a class="btn btn-secondary" href="services.html">Explore Services</a>
+              <a class="btn btn-secondary" href="services.html">Explore Our Services</a>
+            </div>
+            <div class="powered-pill">
+              <img src="assets/aerovista-mark-exact.png" alt="">
+              <p><strong>Powered by Aero</strong><span>Our proprietary data investigation platform</span></p>
             </div>
           </div>
-          <div class="hero-workbench" aria-label="Aero-powered consulting workspace preview">
-            <div class="workbench-shell">
-              <div class="workbench-brand">
-                <img src="assets/aerovista-mark-exact.png" alt="">
-                <strong>Aero</strong>
-                <span>Consulting Workspace</span>
+          <div class="render-hero-visual" aria-label="Aero data consulting capabilities">
+            <div class="data-panel panel-bars">
+              <p>Data Investigation</p>
+              <div aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            </div>
+            <div class="data-panel panel-score">
+              <p>Data Quality</p>
+              <div class="score-ring"><strong>QA</strong></div>
+              <span>High<br>confidence</span>
+            </div>
+            <div class="data-panel panel-grid">
+              <p>Reconciliation</p>
+              <div aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
               </div>
-              <div class="workbench-body">
-                <aside class="workbench-sidebar" aria-hidden="true">
-                  <span></span><span></span><span></span><span></span>
-                </aside>
-                <div class="workbench-main">
-                  <div class="workbench-toolbar"><span></span><span></span><span></span></div>
-                  <h2>Data Trust Review</h2>
-                  <div class="workbench-controls">
-                    <span>Source exports</span>
-                    <span>Validation logic</span>
-                    <span>Executive summary</span>
-                  </div>
-                  <div class="workbench-chart" aria-hidden="true">
-                    <i></i><i></i><i></i><i></i><i></i>
-                  </div>
-                  <div class="workbench-results">
-                    <div><strong>16,500+</strong><small>records reconciled</small></div>
-                    <div><strong>858</strong><small>billing issues identified</small></div>
-                  </div>
-                </div>
-              </div>
+            </div>
+            <div class="data-panel panel-line">
+              <p>Executive Insights</p>
+              <svg viewBox="0 0 260 120" aria-hidden="true">
+                <polyline points="10,92 45,68 80,82 115,48 150,76 190,28 225,58 250,34"></polyline>
+                <path d="M10 92 L45 68 L80 82 L115 48 L150 76 L190 28 L225 58 L250 34 L250 112 L10 112 Z"></path>
+              </svg>
+            </div>
+            <div class="aero-platform" aria-hidden="true">
+              <img src="assets/aerovista-mark-exact.png" alt="">
             </div>
           </div>
         </div>
       </section>
 
-      <section class="proof-band" aria-label="AeroVista proof points">
-        <div class="container proof-band-inner">
-          <p>Trusted when decisions depend on clean, reconciled data</p>
-          <div><strong>16,500+</strong><span>member records reconciled</span></div>
-          <div><strong>858</strong><span>billing issues caught before import</span></div>
-          <div><strong>50+</strong><span>source files prepared for migration</span></div>
-          <div><strong>Aero</strong><span>proprietary investigation platform</span></div>
-        </div>
-      </section>
-
-      <section class="section trust-problem-section">
-        <div class="container trust-problem-grid">
-          <div class="section-heading">
-            <p>The Risk</p>
+      <section class="render-problem-section">
+        <div class="container render-problem-grid">
+          <div class="render-problem-copy">
             <h2>When the data isn't trusted, neither are the decisions.</h2>
-            <span aria-hidden="true"></span>
+            <p>From messy data to conflicting reports, organizations face challenges that lead to costly mistakes and missed opportunities.</p>
           </div>
-          <div class="problem-card executive-problem-card">
-            <p>
-              Organizations rarely have a reporting problem in isolation. They have conflicting
-              exports, unclear definitions, incomplete histories, and records that do not agree
-              across systems.
-            </p>
-            <div class="issue-grid" aria-label="Common data trust issues">
-              <span>Duplicate records</span>
-              <span>Conflicting reports</span>
-              <span>Migration risks</span>
-              <span>Spreadsheet chaos</span>
-              <span>Data quality issues</span>
-              <span>Executive reporting inconsistencies</span>
-            </div>
-            <p>
-              AeroVista is the consulting partner for tracing the evidence, reconciling the logic,
-              and helping leaders make decisions with confidence.
-            </p>
+          <div class="render-issue-grid" aria-label="Common data trust issues">
+            <article><span aria-hidden="true">DR</span><h3>Duplicate Records</h3><p>Inconsistent, duplicate, and outdated data create confusion and risk.</p></article>
+            <article><span aria-hidden="true">CR</span><h3>Conflicting Reports</h3><p>Different numbers across systems make it impossible to trust the truth.</p></article>
+            <article><span aria-hidden="true">MR</span><h3>Migration Risks</h3><p>Poor data quality leads to failed migrations, delays, and unexpected costs.</p></article>
+            <article><span aria-hidden="true">SC</span><h3>Spreadsheet Chaos</h3><p>Manual processes and spreadsheets do not scale and introduce errors.</p></article>
+            <article><span aria-hidden="true">DQ</span><h3>Data Quality Issues</h3><p>Missing, incomplete, or incorrect data undermines every decision.</p></article>
+            <article><span aria-hidden="true">BI</span><h3>Executive Blind Spots</h3><p>Leaders cannot act confidently without accurate, timely, trusted data.</p></article>
           </div>
         </div>
+        <p class="render-truth-line">AeroVista helps you find the truth in your data&mdash;and act on it with confidence.</p>
       </section>
 
-      <section class="section offer-section" id="services">
+      <section class="render-services-section" id="services">
         <div class="container">
-          <div class="section-heading centered">
-            <p>Services</p>
-            <h2>Premium Consulting for Data Trust and Decision Support</h2>
-            <span aria-hidden="true"></span>
-            <p class="section-intro centered-intro">
-              AeroVista works with membership organizations, associations, nonprofits, training
-              companies, and growing businesses that need reliable data before important operational
-              or executive decisions.
-            </p>
+          <div class="render-section-heading">
+            <p>Our Services</p>
+            <h2>Expert consulting. Proven impact.</h2>
           </div>
-          <div class="premium-service-grid">
-            <article class="offer-card premium-service-card">
-              <p class="plan-label">Audit</p>
-              <h3>Data Trust Audits</h3>
-              <p>Assess whether critical records, definitions, counts, statuses, and reporting logic can be trusted before they influence decisions.</p>
-              <a class="text-link" href="services.html">Explore service <span aria-hidden="true">-&gt;</span></a>
-            </article>
-            <article class="offer-card premium-service-card">
-              <p class="plan-label">Migration</p>
-              <h3>Migration Readiness</h3>
-              <p>Prepare, clean, map, and validate source data before a CRM, AMS, payment, learning, or operational system migration.</p>
-              <a class="text-link" href="services.html">Explore service <span aria-hidden="true">-&gt;</span></a>
-            </article>
-            <article class="offer-card premium-service-card">
-              <p class="plan-label">Investigation</p>
-              <h3>Data Investigation</h3>
-              <p>Answer high-value business questions by tracing the source records, testing assumptions, and separating signal from noise.</p>
-              <a class="text-link" href="services.html">Explore service <span aria-hidden="true">-&gt;</span></a>
-            </article>
-            <article class="offer-card premium-service-card">
-              <p class="plan-label">Reporting</p>
-              <h3>Business Intelligence &amp; Executive Reporting</h3>
-              <p>Turn validated data into leadership-ready reporting, KPI logic, board summaries, and decision-support analysis.</p>
-              <a class="text-link" href="services.html">Explore service <span aria-hidden="true">-&gt;</span></a>
-            </article>
-            <article class="offer-card premium-service-card">
-              <p class="plan-label">Reconcile</p>
-              <h3>Data Reconciliation</h3>
-              <p>Match records across files and systems, resolve discrepancies, document logic, and create a clearer source of truth.</p>
-              <a class="text-link" href="services.html">Explore service <span aria-hidden="true">-&gt;</span></a>
-            </article>
+          <div class="render-service-grid">
+            <article><span aria-hidden="true">DT</span><h3>Data Trust Audits</h3><p>Comprehensive assessments to uncover data quality issues, inconsistencies, and risks.</p><a href="services.html" aria-label="Explore Data Trust Audits">-&gt;</a></article>
+            <article><span aria-hidden="true">MR</span><h3>Migration Readiness</h3><p>Prepare your data for successful migrations to CRM, ERP, AMS, and cloud platforms.</p><a href="services.html" aria-label="Explore Migration Readiness">-&gt;</a></article>
+            <article><span aria-hidden="true">DI</span><h3>Data Investigation</h3><p>Deep-dive analyses to answer critical business questions with evidence-backed findings.</p><a href="services.html" aria-label="Explore Data Investigation">-&gt;</a></article>
+            <article><span aria-hidden="true">BI</span><h3>Business Intelligence &amp; Reporting</h3><p>Executive-ready dashboards and reports that turn data into actionable insights.</p><a href="services.html" aria-label="Explore Business Intelligence and Reporting">-&gt;</a></article>
+            <article><span aria-hidden="true">RC</span><h3>Data Reconciliation</h3><p>Reconcile data across multiple systems and sources to establish a single source of truth.</p><a href="services.html" aria-label="Explore Data Reconciliation">-&gt;</a></article>
           </div>
+          <a class="btn btn-primary render-center-button" href="services.html">View All Services</a>
         </div>
       </section>
 
-      <section class="section aero-section">
-        <div class="container aero-grid">
-          <div class="aero-copy">
-            <div class="section-heading">
-              <p>Powered by Aero</p>
-              <h2>Experienced consulting, accelerated by proprietary technology.</h2>
-              <span aria-hidden="true"></span>
-            </div>
+      <section class="render-aero-section">
+        <div class="container render-aero-grid">
+          <div>
+            <p class="render-kicker">Powered by Aero</p>
+            <h2>Proprietary technology. Human expertise.</h2>
             <p>
               Every AeroVista engagement is powered by Aero, our proprietary data investigation
-              platform. Aero is not software clients buy. It is the internal methodology and
-              technology AeroVista uses to investigate data, validate findings, reconcile sources,
-              and produce evidence-backed reports more efficiently.
-            </p>
-            <p>
-              Clients receive the benefit of Aero through the consulting engagement: clearer
-              workpapers, faster analysis, stronger validation, and more defensible recommendations.
+              platform. Aero enables us to accelerate analysis, improve accuracy, and deliver fully
+              traceable, evidence-backed results.
             </p>
           </div>
-          <div class="aero-capability-card">
-            <p>What Aero enables</p>
-            <ul>
-              <li>Investigate complex datasets</li>
-              <li>Validate business logic</li>
-              <li>Reconcile multiple data sources</li>
-              <li>Identify inconsistencies</li>
-              <li>Produce evidence-backed reports</li>
-              <li>Accelerate consulting engagements</li>
-            </ul>
+          <div class="render-aero-list">
+            <p><span>01</span>Investigate complex datasets across multiple systems</p>
+            <p><span>02</span>Validate business logic and data integrity</p>
+            <p><span>03</span>Reconcile and match data with high accuracy</p>
+            <p><span>04</span>Identify inconsistencies, gaps, and anomalies</p>
+            <p><span>05</span>Produce evidence-backed reports and audit trails</p>
+            <p><span>06</span>Accelerate delivery without compromising quality</p>
           </div>
         </div>
       </section>
 
-      <section class="impact section" id="case-studies">
-        <div class="container impact-grid">
-          <div class="impact-copy">
-            <div class="section-heading">
-              <p>Case Study</p>
-              <h2>Membership data migration support for 16,500+ records.</h2>
-            </div>
-            <p>
-              AeroVista supported a membership organization through data migration readiness,
-              reconciliation, validation, executive reporting, and CEO collaboration without
-              inventing confidence where the data did not support it.
-            </p>
-            <a class="btn compact" href="case-studies.html">View Case Studies</a>
+      <section class="render-case-section" id="case-studies">
+        <div class="container render-case-grid">
+          <div>
+            <p class="render-kicker">Case Study</p>
+            <h2>16,500+ members.<br>One trusted system.</h2>
+            <p>We partnered with a national membership organization to clean, reconcile, and migrate their member data.</p>
+            <a class="text-link" href="case-studies/nafi-membership-data-migration">View Case Study <span aria-hidden="true">-&gt;</span></a>
           </div>
-          <article class="case-card premium-case-card">
-            <div class="case-meta">
-              <span class="case-icon" aria-hidden="true">
-                <svg viewBox="0 0 48 48"><circle cx="24" cy="14" r="8"></circle><path d="M10 41c2-10 7-16 14-16s12 6 14 16"></path></svg>
-              </span>
-              <p><span>Client Type</span>Membership Organization</p>
-              <p><span>Work</span>Migration readiness, reconciliation, validation, and executive reporting</p>
-              <p><span>Leadership</span>CEO collaboration and post-migration QA</p>
-            </div>
-            <div class="case-body">
-              <h3>From fragmented exports to migration-ready evidence.</h3>
-              <p>
-                The engagement involved member records, source spreadsheets, payment information,
-                subscription history, coursework, active/lapsed logic, duplicate review, and
-                executive-ready reporting for launch decisions.
-              </p>
-              <div class="metric-row">
-                <div class="metric"><strong>16,500+</strong><small>Member records reviewed</small></div>
-                <div class="metric"><strong>50+</strong><small>Source files coordinated</small></div>
-                <div class="metric"><strong>858</strong><small>Billing issues identified before import</small></div>
-                <div class="metric"><strong>Evidence</strong><small>Status logic validated before launch</small></div>
-              </div>
-              <a class="text-link" href="case-studies/nafi-membership-data-migration">View Case Study <span aria-hidden="true">-&gt;</span></a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="why-section section">
-        <div class="container">
-          <div class="section-heading centered">
-            <p>Why AeroVista</p>
-            <h2>Consulting rigor with technology-enabled evidence.</h2>
-            <span aria-hidden="true"></span>
-          </div>
-          <div class="why-grid premium-why-grid">
-            <article><h3>Evidence-Backed Analysis</h3><p>Findings are grounded in source records, documented assumptions, and traceable workpapers.</p></article>
-            <article><h3>Executive-Ready Reporting</h3><p>Complex data issues are translated into clear decisions, risks, and next steps for leadership.</p></article>
-            <article><h3>Transparent Methodology</h3><p>Logic, exceptions, and reconciliation steps are documented so teams can understand and defend the result.</p></article>
-            <article><h3>Proprietary Technology</h3><p>Aero accelerates investigation and validation while AeroVista remains a consulting firm clients hire for judgment.</p></article>
-            <article><h3>Business-First Consulting</h3><p>The work starts with the decision, process, migration, or report the organization needs to trust.</p></article>
-            <article><h3>Trusted Outcomes</h3><p>The goal is not more charts. It is confidence in the data behind operational and executive decisions.</p></article>
+          <div class="render-case-metrics">
+            <article><span aria-hidden="true">01</span><strong>16,500+</strong><p>Member records processed</p></article>
+            <article><span aria-hidden="true">02</span><strong>858</strong><p>Billing issues caught before import</p></article>
+            <article><span aria-hidden="true">03</span><strong>50+</strong><p>Source files prepared for migration</p></article>
+            <article><span aria-hidden="true">QA</span><strong>QA</strong><p>Post-migration quality assurance</p></article>
           </div>
         </div>
       </section>
 
-      <section class="section seo-content-section">
-        <div class="container seo-content-card">
-          <div class="section-heading">
-            <p>Data Trust Consulting</p>
-            <h2>Built for organizations preparing for migration, reporting, automation, or executive decisions.</h2>
-            <span aria-hidden="true"></span>
-          </div>
-          <p>
-            AeroVista supports data trust audits, membership data cleanup, association database
-            cleanup, migration readiness, data reconciliation, duplicate member records review,
-            executive reporting, business intelligence, and data investigation for organizations
-            that need reliable answers from complex operational data.
-          </p>
-        </div>
-      </section>
-
-      <section class="cta-band premium-cta">
-        <div class="container cta-inner">
-          <span class="calendar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48"><rect x="7" y="10" width="34" height="31" rx="2"></rect><path d="M15 5v10"></path><path d="M33 5v10"></path><path d="M7 20h34"></path><path d="M15 28h4"></path><path d="M23 28h4"></path><path d="M31 28h4"></path><path d="M15 35h4"></path><path d="M23 35h4"></path></svg>
-          </span>
+      <section class="render-final-cta">
+        <div class="container render-final-grid">
           <div>
             <h2>Ready to Trust Your Data?</h2>
-            <p>Schedule a consultation to discuss the records, systems, reports, and decisions that need stronger evidence.</p>
+            <p>Let's discuss how AeroVista can help you uncover the truth in your data and drive confident business decisions.</p>
           </div>
           <a class="btn btn-primary" href="contact.html">
             Schedule a Consultation
