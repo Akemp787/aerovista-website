@@ -174,7 +174,7 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 24px;
   font-size: 13px;
   font-weight: 800;
 }
@@ -709,6 +709,12 @@ svg {
 
 .homepage-note .text-link {
   flex: 0 0 auto;
+  margin-top: 0;
+  padding: 7px 11px;
+  background: #ffffff;
+  border: 1px solid #b8ddff;
+  border-radius: 999px;
+  font-size: 14px;
   white-space: nowrap;
 }
 
