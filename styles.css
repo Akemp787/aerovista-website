@@ -259,7 +259,7 @@ svg {
 }
 
 .hero-copy {
-  width: 540px;
+  width: 620px;
   padding-bottom: 6px;
 }
 
@@ -274,8 +274,8 @@ svg {
 
 .hero h1 {
   margin: 0;
-  max-width: 520px;
-  font-size: 48px;
+  max-width: 640px;
+  font-size: 52px;
   line-height: 1.12;
   letter-spacing: 0;
   font-weight: 850;
@@ -292,7 +292,7 @@ svg {
 }
 
 .hero p {
-  max-width: 500px;
+  max-width: 610px;
   margin: 0 0 28px;
   color: rgba(255, 255, 255, 0.92);
   font-size: 16px;
@@ -308,7 +308,7 @@ svg {
 }
 
 .hero-proof div {
-  min-width: 142px;
+  min-width: 156px;
   padding: 10px 13px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(140, 196, 255, 0.28);
@@ -604,13 +604,22 @@ svg {
 
 .offer-card {
   display: flex;
-  min-height: 430px;
+  min-height: 405px;
   flex-direction: column;
   padding: 28px;
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 5px;
   box-shadow: 0 8px 20px rgba(14, 52, 93, 0.05);
+}
+
+.offer-card:first-child {
+  border-color: #9bc9ff;
+  box-shadow: 0 16px 34px rgba(0, 114, 255, 0.1);
+}
+
+.offer-card .plan-label {
+  color: var(--blue);
 }
 
 .offer-card h3 {
@@ -1164,7 +1173,7 @@ svg {
 
 .impact-grid {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 330px 1fr;
   gap: 56px;
   align-items: center;
 }
@@ -1183,10 +1192,11 @@ svg {
 
 .case-card {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 238px 1fr;
   min-height: 286px;
   overflow: hidden;
   background: #ffffff;
+  border: 1px solid #dbe8f6;
   border-radius: 5px;
   box-shadow: var(--shadow);
 }
@@ -1247,7 +1257,7 @@ svg {
 }
 
 .case-body > p {
-  max-width: 640px;
+  max-width: 700px;
   margin: 0 0 26px;
   font-size: 15px;
   line-height: 1.7;
@@ -2631,7 +2641,7 @@ svg {
 
   .hero h1 {
     max-width: 100%;
-    font-size: 28px;
+    font-size: 26px;
     overflow-wrap: anywhere;
     white-space: normal;
   }
@@ -2854,7 +2864,7 @@ svg {
   }
 
   .hero h1 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .hero-actions .btn {
