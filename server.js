@@ -34,6 +34,11 @@ let lastRateLimitCleanup = Date.now();
 const csrfCookieSecure = PUBLIC_SITE_URL.startsWith("https://") ? "; Secure" : "";
 
 const allowedServices = new Set([
+  "Data Trust Audits",
+  "Migration Readiness",
+  "Data Investigation",
+  "Business Intelligence & Executive Reporting",
+  "Data Reconciliation",
   "Data Diagnostic",
   "Migration Reconciliation Sprint",
   "Ongoing Data Steward Support",

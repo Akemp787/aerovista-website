@@ -17,6 +17,12 @@ http://localhost:3000
 
 Set `PUBLIC_SITE_URL` to the local HTTP URL while testing locally. In production it should remain `https://aerovistaanalytics.com` so the CSRF cookie is marked `Secure`.
 
+Run the syntax check before committing:
+
+```powershell
+npm run check
+```
+
 ## Backend Features
 
 - Serves the website pages and assets.

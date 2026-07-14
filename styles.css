@@ -4063,8 +4063,16 @@ body.home-render {
 }
 
 @media (max-width: 900px) {
+  .home-render .site-header {
+    height: auto;
+  }
+
   .home-render .header-inner {
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: auto;
+    padding: 12px 0 0;
   }
 
   .home-render .header-cta {
@@ -4072,15 +4080,19 @@ body.home-render {
   }
 
   .home-render .nav-toggle {
-    display: flex;
+    display: none;
+    width: 44px;
+    height: 44px;
     flex-direction: column;
     gap: 5px;
     align-items: center;
     justify-content: center;
     justify-self: end;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(158, 204, 255, 0.28);
+    padding: 0;
+    background: rgba(0, 114, 255, 0.18);
+    border: 1px solid rgba(158, 204, 255, 0.46);
     border-radius: 6px;
+    flex: 0 0 44px;
   }
 
   .home-render .site-header.nav-open {
@@ -4088,10 +4100,31 @@ body.home-render {
   }
 
   .home-render .site-nav {
+    order: 3;
+    display: flex;
+    width: 100%;
+    gap: 22px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 0 2px;
     background: #020914;
+    scrollbar-width: none;
+  }
+
+  .home-render .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-render .site-nav a {
+    flex: 0 0 auto;
+    min-height: 46px;
+    white-space: nowrap;
   }
 
   .home-render .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
     background: #ffffff;
   }
 
@@ -4143,6 +4176,10 @@ body.home-render {
     width: calc(100% - 40px);
   }
 
+  .home-render .site-nav {
+    max-width: 100%;
+  }
+
   .home-render .brand img {
     width: 178px;
   }
@@ -4171,6 +4208,7 @@ body.home-render {
     left: auto;
     width: 100%;
     margin-bottom: 12px;
+    overflow: hidden;
   }
 
   .aero-platform,
@@ -4539,16 +4577,26 @@ body.render-page {
 }
 
 @media (max-width: 900px) {
+  .render-page .site-header {
+    height: auto;
+  }
+
   .render-page .container {
     width: min(884px, calc(100% - 32px));
   }
 
   .render-page .header-inner {
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: auto;
+    padding: 12px 0 0;
   }
 
   .render-page .legal-header-inner {
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .render-page .header-cta {
@@ -4556,7 +4604,9 @@ body.render-page {
   }
 
   .render-page .nav-toggle {
-    display: flex;
+    display: none;
+    width: 44px;
+    height: 44px;
     flex-direction: column;
     gap: 5px;
     align-items: center;
@@ -4565,9 +4615,13 @@ body.render-page {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(158, 204, 255, 0.28);
     border-radius: 6px;
+    flex: 0 0 44px;
   }
 
   .render-page .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
     background: #ffffff;
   }
 
@@ -4577,8 +4631,31 @@ body.render-page {
     border-color: rgba(116, 169, 255, 0.24);
   }
 
+  .render-page .site-nav {
+    order: 3;
+    display: flex;
+    width: 100%;
+    gap: 22px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 0 2px;
+    background: #020914;
+    scrollbar-width: none;
+  }
+
+  .render-page .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
   .render-page .site-header.nav-open .site-nav a {
     color: #ffffff;
+  }
+
+  .render-page .site-nav a {
+    flex: 0 0 auto;
+    min-height: 46px;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
   }
 
   .render-page .page-hero,
@@ -4592,8 +4669,16 @@ body.render-page {
 }
 
 @media (max-width: 620px) {
+  .render-page {
+    overflow-x: hidden;
+  }
+
   .render-page .container {
     width: calc(100% - 40px);
+  }
+
+  .render-page .site-nav {
+    max-width: 100%;
   }
 
   .render-page .brand img {
@@ -4641,6 +4726,22 @@ body.render-page {
 
   .render-page .request-copy {
     padding: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .render-page .request-copy > p,
+  .render-page .contact-methods a,
+  .render-page .contact-methods span {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .render-page .contact-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px 18px;
   }
 
   .render-page .legal-content {
