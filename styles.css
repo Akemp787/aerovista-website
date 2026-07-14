@@ -3779,7 +3779,7 @@ body.home-render {
 
 .render-issue-grid article {
   min-height: 150px;
-  padding: 0 30px 28px;
+  padding: 10px 30px 28px;
   border-right: 1px solid #dce7f1;
 }
 
@@ -3787,7 +3787,6 @@ body.home-render {
   padding-top: 26px;
 }
 
-.render-issue-grid span,
 .render-service-grid span,
 .render-aero-list span,
 .render-case-metrics span {
@@ -3803,7 +3802,7 @@ body.home-render {
 }
 
 .render-issue-grid h3 {
-  margin: 14px 0 8px;
+  margin: 0 0 8px;
   color: #005bd6;
   font-size: 15px;
 }
