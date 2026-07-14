@@ -4038,6 +4038,74 @@ body.home-render {
   color: #6ec1ff;
 }
 
+.aero-home-teaser {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: #ffffff;
+  background: #020914;
+  border: 1px solid rgba(116, 169, 255, 0.28);
+  border-radius: 12px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+  transform: translateZ(0);
+}
+
+.aero-home-teaser::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 52%, rgba(2, 9, 20, 0.86)),
+    linear-gradient(90deg, rgba(2, 9, 20, 0.22), transparent 28%);
+  content: "";
+  pointer-events: none;
+}
+
+.aero-home-teaser img {
+  display: block;
+  width: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.aero-home-teaser span {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  left: 22px;
+  z-index: 1;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.aero-home-teaser strong {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.aero-home-teaser em {
+  max-width: 270px;
+  color: rgba(255, 255, 255, 0.72);
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.aero-home-teaser:is(:hover, :focus-visible) img {
+  filter: saturate(1.08) contrast(1.04);
+  transform: scale(1.025);
+}
+
+.aero-home-teaser:focus-visible {
+  outline: 3px solid rgba(88, 170, 255, 0.95);
+  outline-offset: 4px;
+}
+
 .aero-showcase {
   display: grid;
   gap: 18px;
@@ -4621,6 +4689,21 @@ body.home-render {
   .render-case-metrics,
   .trust-example-flow {
     grid-template-columns: 1fr;
+  }
+
+  .aero-home-teaser img {
+    min-height: 240px;
+  }
+
+  .aero-home-teaser span {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .aero-home-teaser em {
+    max-width: 230px;
+    text-align: left;
   }
 
   .trust-example-card {
