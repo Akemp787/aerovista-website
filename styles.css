@@ -3787,7 +3787,6 @@ body.home-render {
   padding-top: 26px;
 }
 
-.render-service-grid span,
 .render-aero-list span,
 .render-case-metrics span {
   display: inline-grid;
@@ -3857,21 +3856,12 @@ body.home-render {
 }
 
 .render-service-grid article {
-  min-height: 220px;
-  padding: 28px 20px 20px;
+  min-height: 198px;
+  padding: 30px 20px 22px;
   background: #ffffff;
   border: 1px solid #dce7f1;
   border-radius: 6px;
   box-shadow: 0 14px 34px rgba(6, 26, 66, 0.06);
-}
-
-.render-service-grid span {
-  width: 42px;
-  height: 42px;
-  margin-bottom: 15px;
-  background: #edf5ff;
-  border-radius: 8px;
-  font-size: 12px;
 }
 
 .render-service-grid h3 {
