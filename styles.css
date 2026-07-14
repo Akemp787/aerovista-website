@@ -3559,61 +3559,72 @@ body.home-render {
 
 .render-hero-visual {
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-content: start;
   min-height: 430px;
+  padding: 6px 0 122px;
 }
 
 .render-hero-visual::before {
   position: absolute;
-  right: 8%;
-  bottom: 26px;
-  left: 8%;
-  height: 170px;
+  right: 4%;
+  bottom: 18px;
+  left: 4%;
+  height: 150px;
   background:
-    linear-gradient(150deg, transparent 0 35%, rgba(0, 114, 255, 0.22) 35% 36%, transparent 36% 100%),
-    linear-gradient(30deg, transparent 0 44%, rgba(0, 114, 255, 0.15) 44% 45%, transparent 45% 100%);
-  opacity: 0.7;
+    radial-gradient(ellipse at center, rgba(0, 114, 255, 0.28), transparent 58%),
+    linear-gradient(150deg, transparent 0 36%, rgba(0, 114, 255, 0.26) 36% 37%, transparent 37% 100%),
+    linear-gradient(30deg, transparent 0 44%, rgba(0, 163, 255, 0.16) 44% 45%, transparent 45% 100%);
+  opacity: 0.86;
   content: "";
 }
 
 .data-panel {
-  position: absolute;
-  width: 206px;
-  min-height: 124px;
-  padding: 16px;
-  background: rgba(5, 19, 42, 0.74);
-  border: 1px solid rgba(113, 179, 255, 0.28);
-  border-radius: 6px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
-  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 1;
+  width: auto;
+  min-height: 138px;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(7, 24, 54, 0.96), rgba(3, 15, 37, 0.92));
+  border: 1px solid rgba(122, 190, 255, 0.34);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 42px rgba(0, 0, 0, 0.24);
 }
 
 .data-panel p {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   color: #ffffff;
-  font-size: 13px;
-  font-weight: 850;
-}
-
-.panel-bars {
-  top: 2px;
-  left: 28px;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.15;
 }
 
 .panel-bars div {
   display: flex;
-  height: 72px;
+  height: 78px;
   align-items: end;
-  gap: 11px;
-  padding: 0 8px;
-  border-top: 1px solid rgba(124, 179, 255, 0.12);
-  border-bottom: 1px solid rgba(124, 179, 255, 0.12);
+  gap: 12px;
+  padding: 10px 8px 0;
+  background:
+    linear-gradient(rgba(98, 173, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 173, 255, 0.1) 1px, transparent 1px);
+  background-size: 100% 26px, 32px 100%;
+  border-top: 1px solid rgba(124, 179, 255, 0.18);
+  border-bottom: 1px solid rgba(124, 179, 255, 0.18);
 }
 
 .panel-bars span {
   display: block;
   flex: 1;
-  background: linear-gradient(180deg, #0786ff, #064ea8);
+  background: linear-gradient(180deg, #16a8ff, #0066e8 68%, #074082);
   border-radius: 2px 2px 0 0;
+  box-shadow: 0 0 16px rgba(0, 132, 255, 0.34);
 }
 
 .panel-bars span:nth-child(1) { height: 22%; }
@@ -3625,11 +3636,9 @@ body.home-render {
 .panel-bars span:nth-child(7) { height: 72%; }
 
 .panel-score {
-  top: 2px;
-  right: 8px;
   display: grid;
-  grid-template-columns: 78px 1fr;
-  column-gap: 14px;
+  grid-template-columns: 86px 1fr;
+  column-gap: 16px;
   align-items: center;
 }
 
@@ -3639,8 +3648,8 @@ body.home-render {
 
 .score-ring {
   display: grid;
-  width: 76px;
-  height: 76px;
+  width: 84px;
+  height: 84px;
   place-items: center;
   background:
     radial-gradient(circle at center, #061326 0 48%, transparent 49%),
@@ -3650,81 +3659,77 @@ body.home-render {
 
 .score-ring strong {
   color: #ffffff;
-  font-size: 21px;
+  font-size: 22px;
 }
 
 .panel-score > span {
   color: rgba(197, 224, 255, 0.78);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.35;
-}
-
-.panel-grid {
-  top: 158px;
-  left: 28px;
 }
 
 .panel-grid div {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 13px;
-  min-height: 72px;
+  gap: 14px;
+  min-height: 78px;
+  padding: 8px 0;
   background:
-    linear-gradient(rgba(50, 142, 255, 0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(50, 142, 255, 0.18) 1px, transparent 1px);
+    linear-gradient(rgba(82, 160, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(82, 160, 255, 0.2) 1px, transparent 1px);
   background-size: 34px 24px;
 }
 
 .panel-grid span {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   place-self: center;
-  background: #0aa3ff;
+  background: #15b9ff;
   border-radius: 50%;
-  box-shadow: 0 0 14px rgba(0, 163, 255, 0.9);
-}
-
-.panel-line {
-  top: 158px;
-  right: 8px;
+  box-shadow: 0 0 18px rgba(0, 163, 255, 0.95);
 }
 
 .panel-line svg {
   width: 100%;
-  height: 84px;
+  height: 88px;
 }
 
 .panel-line polyline {
   fill: none;
-  stroke: #0aa3ff;
-  stroke-width: 4;
+  stroke: #13aaff;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .panel-line path {
-  fill: rgba(0, 114, 255, 0.2);
+  fill: rgba(0, 114, 255, 0.24);
 }
 
 .aero-platform {
   position: absolute;
-  right: 110px;
-  bottom: 10px;
+  z-index: 0;
+  right: 50%;
+  bottom: 0;
   display: grid;
-  width: 230px;
-  height: 92px;
+  width: 252px;
+  height: 96px;
   place-items: center;
-  background: linear-gradient(145deg, rgba(2, 19, 50, 0.98), rgba(0, 45, 118, 0.82));
+  background:
+    linear-gradient(145deg, rgba(3, 20, 52, 0.98), rgba(0, 58, 146, 0.82));
   border: 1px solid rgba(70, 172, 255, 0.9);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow:
-    0 0 28px rgba(0, 114, 255, 0.9),
+    0 0 34px rgba(0, 114, 255, 0.92),
     0 24px 70px rgba(0, 0, 0, 0.38);
-  transform: perspective(500px) rotateX(58deg) rotateZ(-45deg);
+  transform: translateX(50%) perspective(520px) rotateX(58deg) rotateZ(-45deg);
 }
 
 .aero-platform img {
   width: 72px;
   height: 72px;
   object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(0, 114, 255, 0.38));
   transform: rotate(45deg) rotateX(-58deg);
 }
 
@@ -4054,11 +4059,12 @@ body.home-render {
   }
 
   .data-panel {
-    width: 190px;
+    width: auto;
   }
 
   .aero-platform {
-    right: 88px;
+    right: 50%;
+    width: 226px;
   }
 }
 
@@ -4151,6 +4157,7 @@ body.home-render {
   .render-hero-visual {
     min-height: 390px;
     max-width: 620px;
+    padding-bottom: 118px;
   }
 
   .render-service-grid {
@@ -4198,7 +4205,9 @@ body.home-render {
   }
 
   .render-hero-visual {
-    min-height: 620px;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-bottom: 0;
   }
 
   .data-panel {
