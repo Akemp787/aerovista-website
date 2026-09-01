@@ -581,6 +581,53 @@ li { margin-bottom: 0.4rem; }
 .hbar .fill { display: block; }
 .viz-bars .bar { display: block; }
 
+/* =====================================================================
+   Mockup alignment (2026): serif logo lockup, hero impact tiles,
+   icon impact strip, navy featured-card panels, method icons.
+   ===================================================================== */
+
+/* Serif logo lockup — wordmark uses the site display serif */
+.brand { display: inline-flex; align-items: center; gap: 0.6rem; }
+.brand-mark { height: 36px; width: auto; }
+.brand-word { display: flex; flex-direction: column; line-height: 1.02; }
+.brand-word b { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; letter-spacing: 0.004em; color: var(--ink); }
+.brand-word small { font-family: var(--font-ui); font-size: 0.56rem; font-weight: 700; letter-spacing: 0.19em; text-transform: uppercase; color: var(--sand); margin-top: 4px; }
+.site-footer .brand-word b { color: #fff; }
+.site-footer .brand-word small { color: #8ba0ba; }
+@media (max-width: 520px) { .brand-word small { display: none; } .brand-word b { font-size: 1.2rem; } .brand-mark { height: 30px; } }
+
+/* Hero viz stat tiles + evidence chip */
+.viz-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1rem; }
+.viz-tile { display: flex; align-items: center; gap: 0.6rem; background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px; padding: 0.7rem 0.8rem; }
+.viz-tile .ico { width: 30px; height: 30px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
+.viz-tile .ico svg { width: 17px; height: 17px; }
+.viz-tile strong { display: block; font-family: var(--font-head); font-size: 1.15rem; color: var(--ink); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; line-height: 1; }
+.viz-tile small { color: var(--faint); font-size: 0.72rem; font-family: var(--font-ui); }
+.viz-chip { position: absolute; top: 14px; right: -16px; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-md); padding: 0.55rem 0.8rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600; color: var(--ink); }
+.viz-chip .tick { width: 22px; height: 22px; border-radius: 6px; background: #e6f2ec; color: var(--teal); display: grid; place-items: center; font-weight: 800; }
+.viz-chip small { display: block; color: var(--faint); font-weight: 400; font-size: 0.68rem; }
+.viz-caption { text-align: center; margin-top: 0.9rem; color: var(--faint); font-family: var(--font-ui); font-size: 0.84rem; }
+@media (max-width: 900px) { .viz-chip { right: 0; } }
+
+/* Icon impact strip (light, under hero) */
+.impact-strip-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(180deg, var(--paper-2), var(--paper)); }
+.impact-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; }
+.impact-cell { display: flex; align-items: center; gap: 0.75rem; }
+.impact-cell .ico { width: 46px; height: 46px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
+.impact-cell .ico svg { width: 22px; height: 22px; }
+.impact-cell strong { display: block; font-family: var(--font-head); font-size: 1.45rem; color: var(--ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.05; }
+.impact-cell span { font-size: 0.8rem; color: var(--muted); font-family: var(--font-ui); }
+@media (max-width: 900px) { .impact-strip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1.2rem; } }
+@media (max-width: 400px) { .impact-strip { grid-template-columns: 1fr; } }
+
+/* Featured work cards — navy chart panels to match reference */
+.work-card-media { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.06); height: 150px; }
+.work-card-media .media-fig { padding: 0; }
+
+/* Method (How I Help) icons */
+.flow-step .ico { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 0.85rem; }
+.flow-step .ico svg { width: 21px; height: 21px; }
+
 /* Long-form prose (legal, resource pages) */
 .prose { max-width: 760px; }
 .prose p, .prose li { color: var(--ink-2); }

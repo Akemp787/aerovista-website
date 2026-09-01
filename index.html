@@ -21,7 +21,7 @@
     <meta name="twitter:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
     <link rel="icon" href="assets/favicon.png" type="image/png">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="stylesheet" href="styles.css?v=20260901v3">
+    <link rel="stylesheet" href="styles.css?v=20260901v4">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -43,7 +43,7 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="AeroVista Analytics home"><img src="assets/logo-header.png" alt="AeroVista Analytics"></a>
+        <a class="brand" href="index.html" aria-label="AeroVista Analytics home"><img class="brand-mark" src="assets/aerovista-mark-exact.png" alt=""><span class="brand-word"><b>AeroVista</b><small>Data &amp; Analytics Consulting</small></span></a>
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
         <nav class="site-nav" id="site-nav" aria-label="Primary navigation"><a class="active" href="index.html">Home</a><a href="case-studies.html">Work</a><a href="services.html">Capabilities</a><a href="about.html">About</a><a class="nav-cta" href="contact.html">Contact</a></nav>
       </div>
@@ -67,7 +67,7 @@
           <div class="hero-visual" aria-hidden="true">
             <div class="viz-card">
               <div class="viz-head">
-                <span class="viz-title">Competed contract share<span>Government-wide, FY21–FY25</span></span>
+                <span class="viz-title">Decision Impact Overview<span>Selected engagements</span></span>
                 <span class="viz-dot"></span>
               </div>
               <div class="viz-bars">
@@ -77,13 +77,26 @@
                 <div class="bar alt"></div>
                 <div class="bar alt"></div>
               </div>
-              <div class="viz-legend">
-                <span><i></i> Competed</span>
-                <span><i class="alt"></i> Non-competed</span>
+              <div class="viz-tiles">
+                <div class="viz-tile"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path></svg></span><div><strong>$3.58T</strong><small>Federal spend analyzed</small></div></div>
+                <div class="viz-tile"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></span><div><strong>16,500+</strong><small>Records reconciled</small></div></div>
               </div>
+              <div class="viz-chip"><span class="tick">&#10003;</span><span>Evidence-backed<small>reproducible pipeline</small></span></div>
             </div>
-            <div class="viz-float one"><span class="tick">$</span><span><strong>$3.58T</strong><small>analyzed FY21–FY25</small></span></div>
-            <div class="viz-float two"><span class="tick">✓</span><span><strong>Evidence-backed</strong><small>reproducible pipeline</small></span></div>
+            <p class="viz-caption">Transparent methods. Trusted data. Actionable insight.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMPACT STRIP -->
+      <section class="section-sm impact-strip-section">
+        <div class="container">
+          <div class="impact-strip">
+            <div class="impact-cell"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"></path><path d="M7 15l4-5 3 3 5-7"></path></svg></span><div><strong>$3.58T</strong><span>Federal spending analyzed</span></div></div>
+            <div class="impact-cell"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"></circle><path d="M3 20c0-3 3-5 6-5s6 2 6 5"></path><path d="M16 5a3 3 0 0 1 0 6M21 20c0-2.5-2-4-4-4.5"></path></svg></span><div><strong>16,500+</strong><span>Member profiles transformed</span></div></div>
+            <div class="impact-cell"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M9.5 14c0 1.1 1.1 2 2.5 2s2.5-.7 2.5-1.8-1-1.5-2.5-1.9-2.3-.8-2.3-1.8 1-1.7 2.3-1.7 2.4.8 2.4 1.8"></path></svg></span><div><strong>$100K+</strong><span>Savings identified</span></div></div>
+            <div class="impact-cell"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="13" r="8"></circle><path d="M12 13V9M12 5V3M9 3h6"></path></svg></span><div><strong>40%</strong><span>Faster reporting turnaround</span></div></div>
+            <div class="impact-cell"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 21V8l8-5 8 5v13"></path><path d="M9 21v-6h6v6"></path></svg></span><div><strong>$3M+</strong><span>Operating budget supported</span></div></div>
           </div>
         </div>
       </section>
@@ -100,12 +113,14 @@
 
             <a class="work-card" href="case-studies/federal-contract-spending/">
               <div class="work-card-media">
-                <svg class="media-fig" viewBox="0 0 300 128" preserveAspectRatio="none" role="img" aria-label="Bar chart of federal contract spending">
-                  <rect class="g-accent-soft" x="24" y="70" width="34" height="58"></rect>
-                  <rect class="g-accent-soft" x="70" y="58" width="34" height="70"></rect>
-                  <rect class="g-accent-soft" x="116" y="60" width="34" height="68"></rect>
-                  <rect class="g-accent-soft" x="162" y="44" width="34" height="84"></rect>
-                  <rect class="g-accent" x="208" y="30" width="34" height="98"></rect>
+                <svg class="media-fig" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Bar chart of federal contract spending with a declining competition line">
+                  <rect x="30" y="94" width="30" height="42" rx="3" fill="#2a4d78"></rect>
+                  <rect x="72" y="76" width="30" height="60" rx="3" fill="#2a4d78"></rect>
+                  <rect x="114" y="80" width="30" height="56" rx="3" fill="#345f8f"></rect>
+                  <rect x="156" y="60" width="30" height="76" rx="3" fill="#4a7fb5"></rect>
+                  <rect x="198" y="42" width="30" height="94" rx="3" fill="#6f8daf"></rect>
+                  <polyline points="45,46 87,52 129,60 171,70 213,82" fill="none" stroke="#9db6d1" stroke-width="2.5"></polyline>
+                  <g fill="#c9d8ea"><circle cx="45" cy="46" r="3"></circle><circle cx="213" cy="82" r="3"></circle></g>
                 </svg>
               </div>
               <div class="work-card-body">
@@ -120,16 +135,16 @@
 
             <a class="work-card" href="case-studies/nafi-membership-data-migration/">
               <div class="work-card-media">
-                <svg class="media-fig" viewBox="0 0 300 128" role="img" aria-label="Diagram of records reconciled to one source of truth">
-                  <line class="g-line" x1="40" y1="30" x2="150" y2="64" stroke-width="2"></line>
-                  <line class="g-line" x1="40" y1="64" x2="150" y2="64" stroke-width="2"></line>
-                  <line class="g-line" x1="40" y1="98" x2="150" y2="64" stroke-width="2"></line>
-                  <line class="g-line" x1="150" y1="64" x2="250" y2="64" stroke-width="2"></line>
-                  <circle class="g-accent-soft" cx="40" cy="30" r="10"></circle>
-                  <circle class="g-accent-soft" cx="40" cy="64" r="10"></circle>
-                  <circle class="g-accent-soft" cx="40" cy="98" r="10"></circle>
-                  <circle class="g-accent" cx="150" cy="64" r="14"></circle>
-                  <rect class="g-accent" x="238" y="52" width="24" height="24" rx="5"></rect>
+                <svg class="media-fig" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram of records reconciled to one source of truth">
+                  <g stroke="#3a5f8a" stroke-width="2">
+                    <line x1="60" y1="40" x2="150" y2="75"></line>
+                    <line x1="60" y1="75" x2="150" y2="75"></line>
+                    <line x1="60" y1="110" x2="150" y2="75"></line>
+                    <line x1="150" y1="75" x2="238" y2="75"></line>
+                  </g>
+                  <g fill="#2a4d78"><circle cx="60" cy="40" r="10"></circle><circle cx="60" cy="75" r="10"></circle><circle cx="60" cy="110" r="10"></circle></g>
+                  <circle cx="150" cy="75" r="15" fill="#6f8daf"></circle>
+                  <rect x="226" y="63" width="24" height="24" rx="5" fill="#9db6d1"></rect>
                 </svg>
               </div>
               <div class="work-card-body">
@@ -144,9 +159,9 @@
 
             <a class="work-card" href="case-studies/loudoun-county-growth-study/">
               <div class="work-card-media">
-                <svg class="media-fig" viewBox="0 0 300 128" preserveAspectRatio="none" role="img" aria-label="Area chart of regional economic growth">
-                  <polygon class="g-accent-soft" points="0,110 50,92 100,96 150,66 200,54 250,34 300,24 300,128 0,128"></polygon>
-                  <polyline points="0,110 50,92 100,96 150,66 200,54 250,34 300,24" fill="none" stroke="#1466d6" stroke-width="3"></polyline>
+                <svg class="media-fig" viewBox="0 0 300 150" preserveAspectRatio="none" role="img" aria-label="Area chart of regional economic growth">
+                  <polygon points="0,126 50,104 100,110 150,74 200,60 250,36 300,26 300,150 0,150" fill="#2a4d78" opacity="0.6"></polygon>
+                  <polyline points="0,126 50,104 100,110 150,74 200,60 250,36 300,26" fill="none" stroke="#6f8daf" stroke-width="3"></polyline>
                 </svg>
               </div>
               <div class="work-card-body">
@@ -163,23 +178,6 @@
         </div>
       </section>
 
-      <!-- IMPACT -->
-      <section class="section section-dark">
-        <div class="container">
-          <div class="section-head">
-            <p class="eyebrow">Impact at a Glance</p>
-            <h2>Numbers behind the work.</h2>
-          </div>
-          <div class="impact-grid">
-            <div class="impact-item"><span class="impact-num">$3.58T</span><span class="impact-label">Federal contract spending analyzed</span></div>
-            <div class="impact-item"><span class="impact-num">16,500+</span><span class="impact-label">Member profiles transformed</span></div>
-            <div class="impact-item"><span class="impact-num">$100K+</span><span class="impact-label">Savings identified</span></div>
-            <div class="impact-item"><span class="impact-num">40%</span><span class="impact-label">Faster reporting turnaround</span></div>
-            <div class="impact-item"><span class="impact-num">$3M+</span><span class="impact-label">Operating budget supported</span></div>
-          </div>
-        </div>
-      </section>
-
       <!-- DECISION-FIRST APPROACH -->
       <section class="section section-tint">
         <div class="container">
@@ -189,11 +187,11 @@
             <p class="lede">Dashboards and queries are means, not ends. Every engagement runs the same disciplined path from an ambiguous question to a recommendation someone can act on.</p>
           </div>
           <div class="flow">
-            <div class="flow-step"><span class="n">1</span><h3>Decision</h3><p>Start with the decision that has to be made and who is accountable for it.</p></div>
-            <div class="flow-step"><span class="n">2</span><h3>Questions</h3><p>Define what the data must answer to support that decision with confidence.</p></div>
-            <div class="flow-step"><span class="n">3</span><h3>Trust</h3><p>Test whether the data can be believed — completeness, conflicts, and reconciliation.</p></div>
-            <div class="flow-step"><span class="n">4</span><h3>Analysis</h3><p>Do the work: reconcile, model, and quantify with evidence at every step.</p></div>
-            <div class="flow-step"><span class="n">5</span><h3>Recommendation</h3><p>Translate the result into a clear, defensible action for leadership.</p></div>
+            <div class="flow-step"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><circle cx="12" cy="12" r="0.5" fill="currentColor"></circle></svg></span><h3>Decision</h3><p>Start with the decision that has to be made and who is accountable for it.</p></div>
+            <div class="flow-step"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"></circle><path d="M16 16l5 5"></path></svg></span><h3>Questions</h3><p>Define what the data must answer to support that decision with confidence.</p></div>
+            <div class="flow-step"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 5-3 7-7 9-4-2-7-4-7-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></span><h3>Trust</h3><p>Test whether the data can be believed — completeness, conflicts, and reconciliation.</p></div>
+            <div class="flow-step"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"></path><path d="M7 15l4-5 3 3 5-7"></path></svg></span><h3>Analysis</h3><p>Do the work: reconcile, model, and quantify with evidence at every step.</p></div>
+            <div class="flow-step"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10c.7.7 1 1.3 1 2h6c0-.7.3-1.3 1-2a6 6 0 0 0-4-10z"></path></svg></span><h3>Recommendation</h3><p>Translate the result into a clear, defensible action for leadership.</p></div>
           </div>
         </div>
       </section>
@@ -267,7 +265,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="assets/logo-footer.png" alt="AeroVista Analytics">
+            <img class="brand-mark" src="assets/aerovista-mark-exact.png" alt=""><span class="brand-word"><b>AeroVista</b></span>
             <p>Independent data &amp; analytics consulting — turning complex data into decisions leaders can trust.</p>
           </div>
           <div>
@@ -302,6 +300,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260901v3"></script>
+    <script src="script.js?v=20260901v4"></script>
   </body>
 </html>

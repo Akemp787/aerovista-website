@@ -19,13 +19,13 @@
     <meta name="twitter:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
     <link rel="icon" href="../../assets/favicon.png" type="image/png">
     <link rel="manifest" href="../../site.webmanifest">
-    <link rel="stylesheet" href="../../styles.css?v=20260901v3">
+    <link rel="stylesheet" href="../../styles.css?v=20260901v4">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="AeroVista Analytics home"><img src="../../assets/logo-header.png" alt="AeroVista Analytics"></a>
+        <a class="brand" href="../../index.html" aria-label="AeroVista Analytics home"><img class="brand-mark" src="../../assets/aerovista-mark-exact.png" alt=""><span class="brand-word"><b>AeroVista</b><small>Data &amp; Analytics Consulting</small></span></a>
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
         <nav class="site-nav" id="site-nav" aria-label="Primary navigation"><a href="../../index.html">Home</a><a class="active" href="../../case-studies.html">Work</a><a href="../../services.html">Capabilities</a><a href="../../about.html">About</a><a class="nav-cta" href="../../contact.html">Contact</a></nav>
       </div>
@@ -110,14 +110,26 @@
 
             <section id="analysis">
               <p class="section-kicker">Analysis</p>
-              <h2>Six dimensions, one model.</h2>
-              <p>The integrated model let each dimension be read against the others — for example, comparing income and employment growth against housing cost and supply to assess whether prosperity was translating into affordability.</p>
-              <div class="cap-grid">
-                <div class="cap-card"><h3>Population</h3><p>Growth, composition, and how the resident base is changing over time.</p></div>
-                <div class="cap-card"><h3>Employment</h3><p>Job growth and labor-market strength from BLS series.</p></div>
-                <div class="cap-card"><h3>Income</h3><p>Household and personal income trends from BEA and Census.</p></div>
-                <div class="cap-card"><h3>Housing &amp; Affordability</h3><p>Whether housing cost and supply keep pace with income and jobs.</p></div>
-              </div>
+              <h2>Six dimensions, one model — and the actual output.</h2>
+              <p>The integrated model let each dimension be read against the others. The charts below are the real project visualizations, produced in Python from the combined Census, BLS, and BEA data.</p>
+
+              <figure class="chart-card">
+                <p class="chart-title">Real GDP trend with forward projection</p>
+                <img src="../../assets/images/loudoun/gdp-forecast.png" alt="Line chart of Loudoun County real GDP from 2001 to 2022 with a dashed forward projection to 2032" loading="lazy">
+                <figcaption>Loudoun County real GDP, 2001–2022, with a statistical projection of the near-term trajectory.</figcaption>
+              </figure>
+
+              <figure class="chart-card">
+                <p class="chart-title">Benchmarked against peer counties</p>
+                <img src="../../assets/images/loudoun/gdp-peer-comparison.png" alt="Multi-line chart comparing real GDP trends across Loudoun and five peer counties, 2001–2023" loading="lazy">
+                <figcaption>Loudoun set against peer counties (Santa Clara, Dallas, Montgomery, Wake, Davidson) — context that separates local dynamics from regional ones.</figcaption>
+              </figure>
+
+              <figure class="chart-card">
+                <p class="chart-title">The affordability lens: income against cost</p>
+                <img src="../../assets/images/loudoun/income-vs-cost.png" alt="Chart comparing household income against cost measures for Loudoun County over time" loading="lazy">
+                <figcaption>Reading household income against cost is what surfaces affordability as the dimension most worth watching.</figcaption>
+              </figure>
             </section>
 
             <section id="findings">
@@ -162,7 +174,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="../../assets/logo-footer.png" alt="AeroVista Analytics">
+            <img class="brand-mark" src="../../assets/aerovista-mark-exact.png" alt=""><span class="brand-word"><b>AeroVista</b></span>
             <p>Independent data &amp; analytics consulting — turning complex data into decisions leaders can trust.</p>
           </div>
           <div>
@@ -197,6 +209,6 @@
       </div>
     </footer>
 
-    <script src="../../script.js?v=20260901v3"></script>
+    <script src="../../script.js?v=20260901v4"></script>
   </body>
 </html>
