@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 66" role="img" aria-label="AeroVista mark">
-  <path fill="#13294a" d="M36 5 L60 60 L48 60 L36 25 L24 60 L12 60 Z"/>
-  <path fill="#6f8daf" d="M8 45 C 28 30, 47 23, 64 14 C 49 25, 30 34, 13 47 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 68" role="img" aria-label="AeroVista mark">
+  <defs>
+    <linearGradient id="sw" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5f7ea1"/>
+      <stop offset="1" stop-color="#a3bcd7"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sw)" d="M5 61 C 24 50, 45 41, 69 18 L66 25 C 44 45, 25 53, 9 62 Z"/>
+  <path fill="#13294a" d="M36 5 L58 60 L46 60 L36 26 L26 60 L14 60 Z"/>
+  <rect fill="#13294a" x="11" y="58" width="18" height="4" rx="1"/>
+  <rect fill="#13294a" x="43" y="58" width="18" height="4" rx="1"/>
 </svg>
