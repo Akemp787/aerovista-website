@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Federal Contract Spending Analysis ($3.58T, FY21–FY25) | AeroVista Analytics</title>
+    <meta name="description" content="A consulting-style analysis of $3.58 trillion in federal contract obligations (FY2021–FY2025): where competition declined, inflation's real effect, and why the Navy explains roughly 70% of the government-wide FY2025 drop.">
+    <link rel="canonical" href="https://aerovistaanalytics.com/case-studies/federal-contract-spending/">
+    <meta name="theme-color" content="#071528">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AeroVista Analytics">
+    <meta property="og:title" content="Federal Contract Spending Analysis | AeroVista Analytics">
+    <meta property="og:description" content="Analyzing $3.58T in federal contract spending to find where competition declined and who drove it.">
+    <meta property="og:url" content="https://aerovistaanalytics.com/case-studies/federal-contract-spending/">
+    <meta property="og:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Federal Contract Spending Analysis">
+    <meta name="twitter:description" content="Analyzing $3.58T in federal contract spending to find where competition declined and who drove it.">
+    <meta name="twitter:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link rel="stylesheet" href="../../styles.css?v=20260901v2">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="AeroVista Analytics home"><img src="../../assets/logo-header.png" alt="AeroVista Analytics"></a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation"><a href="../../index.html">Home</a><a class="active" href="../../case-studies.html">Work</a><a href="../../services.html">Capabilities</a><a href="../../about.html">About</a><a class="nav-cta" href="../../contact.html">Contact</a></nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-hero">
+        <div class="container">
+          <p class="breadcrumb"><a href="../../case-studies.html">Work</a> · Federal Contract Spending</p>
+          <p class="eyebrow">Case Study · Federal / Public Sector</p>
+          <h1>Where did federal contract competition actually decline — and who drove it?</h1>
+          <p>An independent analysis of $3.58&nbsp;trillion in federal contract obligations across five fiscal years, built to separate real signal from inflation and to locate the source of a government-wide decline in competition.</p>
+          <div class="cs-meta-row">
+            <div><span>Role</span><strong>Independent analysis — end to end</strong></div>
+            <div><span>Scope</span><strong>FY2021 – FY2025</strong></div>
+            <div><span>Data</span><strong>USAspending contract obligations</strong></div>
+            <div><span>Stack</span><strong>Python · SQL · DuckDB</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container cs-layout">
+          <aside class="cs-sidebar" aria-label="Case study summary">
+            <div class="cs-facts">
+              <p><span>Subject</span>U.S. federal contract spending</p>
+              <p><span>Question</span>Is competition declining — and where?</p>
+              <p><span>Method</span>Reproducible analytical pipeline with automated tests</p>
+            </div>
+            <div class="cs-metrics">
+              <div><strong>$3.58T</strong><span>obligations analyzed</span></div>
+              <div><strong>+22.9%</strong><span>nominal growth FY21–FY25</span></div>
+              <div><strong>+4.3%</strong><span>inflation-adjusted growth</span></div>
+              <div><strong>~70%</strong><span>of FY25 competition decline from one buyer</span></div>
+            </div>
+            <nav class="cs-toc" aria-label="On this page">
+              <a href="#overview">Overview</a>
+              <a href="#challenge">The Challenge</a>
+              <a href="#questions">Questions</a>
+              <a href="#approach">Approach</a>
+              <a href="#analysis">Analysis</a>
+              <a href="#findings">Key Findings</a>
+              <a href="#implications">Implications</a>
+              <a href="#tools">Tools &amp; Methods</a>
+            </nav>
+          </aside>
+
+          <article class="cs-content">
+            <section id="overview">
+              <p class="section-kicker">Overview</p>
+              <h2>Five years of spending, one question about competition.</h2>
+              <p>Competition is one of the clearest signals of health in federal contracting: when a larger share of dollars is competed, the government generally gets better pricing and lower risk. Headlines periodically claim competition is "falling," but the topline is noisy — inflation inflates raw dollars, and a handful of large buyers can move the government-wide number on their own.</p>
+              <p>I analyzed $3.58&nbsp;trillion in federal contract obligations from FY2021 through FY2025 to answer a deliberately practical question: is competition really declining, and if so, <em>where</em> — at a level specific enough to act on.</p>
+            </section>
+
+            <section id="challenge">
+              <p class="section-kicker">The Challenge</p>
+              <h2>The topline hides more than it reveals.</h2>
+              <p>Three problems make the raw numbers untrustworthy for decision-making:</p>
+              <ul>
+                <li><strong>Inflation.</strong> Nominal growth overstates real change; a rising dollar figure can mask flat or declining activity.</li>
+                <li><strong>Aggregation.</strong> A single large department — or one service branch within it — can drive a government-wide shift, so the headline tells you <em>that</em> something moved, not <em>who</em> moved it.</li>
+                <li><strong>Data quality.</strong> Government contract data carries nulls, revisions, and inconsistent coding that quietly distort naive queries.</li>
+              </ul>
+            </section>
+
+            <section id="questions">
+              <p class="section-kicker">Questions</p>
+              <h2>What the analysis had to answer.</h2>
+              <ul class="q-list">
+                <li>After adjusting for inflation, did federal contract spending actually grow — and by how much?</li>
+                <li>Did the <em>competed</em> share of obligations decline, and in which fiscal year?</li>
+                <li>Which department and which sub-agency accounts for most of the decline?</li>
+                <li>Are there timing patterns (e.g., end-of-fiscal-year concentration) that signal risk?</li>
+              </ul>
+            </section>
+
+            <section id="approach">
+              <p class="section-kicker">Approach</p>
+              <h2>A reproducible pipeline, not a one-off query.</h2>
+              <p>I built the analysis as an engineered pipeline so every number is traceable and re-runnable:</p>
+              <ul>
+                <li>Ingested contract obligations directly from government APIs into a local analytical store using <strong>DuckDB</strong>.</li>
+                <li>Modeled the data into clean analytical tables, applying <strong>data-quality validation</strong> to handle nulls, revisions, and inconsistent agency coding.</li>
+                <li>Adjusted nominal dollars into <strong>inflation-adjusted</strong> terms to measure real change.</li>
+                <li>Computed competed-share metrics government-wide, then decomposed the change by department and sub-agency.</li>
+                <li>Wrapped the pipeline in <strong>automated tests and GitHub Actions</strong> so results regenerate identically and regressions surface immediately.</li>
+              </ul>
+            </section>
+
+            <section id="analysis">
+              <p class="section-kicker">Analysis</p>
+              <h2>Separating real change from noise.</h2>
+              <p>Adjusting for inflation reframed the entire story. Nominal obligations rose sharply, but the real increase was modest — most of the "growth" was the dollar losing value, not activity expanding.</p>
+
+              <figure class="chart-card">
+                <p class="chart-title">Contract obligation growth, FY2021 → FY2025</p>
+                <div class="hbars">
+                  <div class="hbar"><span class="label">Nominal</span><span class="track"><span class="fill" data-w="100"></span></span><span class="val">+22.9%</span></div>
+                  <div class="hbar"><span class="label">Inflation-adjusted</span><span class="track"><span class="fill alt" data-w="19"></span></span><span class="val">+4.3%</span></div>
+                </div>
+                <figcaption>Real growth was roughly one-fifth of the headline figure once inflation is removed.</figcaption>
+              </figure>
+
+              <p>With real growth established, I turned to competition. The competed share of obligations declined, with the sharpest movement landing in FY2025 — then decomposed that decline to find its source.</p>
+
+              <figure class="chart-card">
+                <p class="chart-title">Competed share of obligations (government-wide)</p>
+                <div class="hbars">
+                  <div class="hbar"><span class="label">FY2021</span><span class="track"><span class="fill" data-w="70.3"></span></span><span class="val">70.3%</span></div>
+                  <div class="hbar"><span class="label">FY2025</span><span class="track"><span class="fill" data-w="66.3"></span></span><span class="val">66.3%</span></div>
+                </div>
+                <figcaption>A four-point drop in competed share — small in the aggregate, but highly concentrated in its source.</figcaption>
+              </figure>
+
+              <figure class="chart-card">
+                <p class="chart-title">Navy competitive share, on ~$176.6B in spending</p>
+                <div class="hbars">
+                  <div class="hbar"><span class="label">FY2021</span><span class="track"><span class="fill" data-w="45.8"></span></span><span class="val">45.8%</span></div>
+                  <div class="hbar"><span class="label">FY2025</span><span class="track"><span class="fill" data-w="36.6"></span></span><span class="val">36.6%</span></div>
+                </div>
+                <figcaption>The Department of the Navy's competitive share fell more than nine points — the single largest contributor to the government-wide decline.</figcaption>
+              </figure>
+            </section>
+
+            <section id="findings">
+              <p class="section-kicker">Key Findings</p>
+              <h2>The decline is real, small in aggregate, and highly concentrated.</h2>
+              <div class="findings">
+                <div class="finding"><span class="fnum">1</span><div><h3>Real growth was modest</h3><p>Nominal obligations rose <span class="stat">+22.9%</span> across FY21–FY25, but only <span class="stat">+4.3%</span> after adjusting for inflation.</p></div></div>
+                <div class="finding"><span class="fnum">2</span><div><h3>Competition slipped in FY2025</h3><p>The competed share fell from <span class="stat">70.3%</span> to <span class="stat">66.3%</span>, with the steepest move concentrated in FY2025.</p></div></div>
+                <div class="finding"><span class="fnum">3</span><div><h3>Defense drove almost all of it</h3><p>The Department of Defense accounted for roughly <span class="stat">93%</span> of the decline in competed share.</p></div></div>
+                <div class="finding"><span class="fnum">4</span><div><h3>The Navy is the epicenter</h3><p>Navy competitive share fell from <span class="stat">45.8%</span> to <span class="stat">36.6%</span> on about <span class="stat">$176.6B</span> — explaining roughly <span class="stat">70%</span> of the entire government-wide FY2025 decline.</p></div></div>
+                <div class="finding"><span class="fnum">5</span><div><h3>Year-end concentration hit a five-year high</h3><p>September spending concentration reached about <span class="stat">19%</span>, the highest in the five-year window — a timing-risk signal for oversight.</p></div></div>
+              </div>
+            </section>
+
+            <section id="implications">
+              <p class="section-kicker">Business Implications &amp; Recommendations</p>
+              <h2>Where oversight and strategy should focus.</h2>
+              <p>The decline in competition is not a diffuse, government-wide trend to be addressed with broad policy. It is concentrated enough to act on precisely:</p>
+              <ul>
+                <li><strong>Target oversight at the Navy.</strong> Because one sub-agency explains roughly 70% of the government-wide decline, competition-improvement efforts there would move the national number more than any broad initiative.</li>
+                <li><strong>Judge programs in real terms.</strong> Inflation-adjusted analysis should be the default; nominal growth overstates activity and can justify budgets that real trends don't support.</li>
+                <li><strong>Watch year-end concentration.</strong> Rising September concentration is a known risk marker for rushed, less-competed awards and deserves monitoring.</li>
+                <li><strong>Institutionalize the pipeline.</strong> Because the analysis is reproducible and tested, it can be re-run each fiscal year to track whether interventions actually change the trend.</li>
+              </ul>
+              <div class="cs-callout">
+                <p class="big">~70%</p>
+                <p>of the FY2025 government-wide decline in contract competition traces to a single buyer — turning a vague national concern into a specific, addressable one.</p>
+              </div>
+            </section>
+
+            <section id="tools">
+              <p class="section-kicker">Tools &amp; Methods</p>
+              <h2>How it was built.</h2>
+              <div class="tool-pills">
+                <span>Python</span><span>SQL</span><span>DuckDB</span><span>Government API ingestion</span><span>Inflation adjustment</span><span>Data-quality validation</span><span>Analytical data modeling</span><span>Automated testing</span><span>GitHub Actions</span><span>Reporting / dashboards</span>
+              </div>
+              <p class="cs-note"><strong>Reproducibility:</strong> the analysis runs as an automated, tested pipeline so every figure regenerates from source. Project repository: <a href="https://github.com/Akemp787/federal-spending-efficiency-analysis" rel="noopener">github.com/Akemp787/federal-spending-efficiency-analysis</a>.</p>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="section cta-band">
+        <div class="container cta-inner">
+          <div>
+            <p class="eyebrow">Bring me an ambiguous question</p>
+            <h2>This is how I approach every problem.</h2>
+            <p>Decision first, evidence throughout, and a recommendation specific enough to act on.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="../../contact.html?reason=Consulting%20Project">Discuss a Project</a>
+            <a class="btn btn-secondary btn-lg" href="../../case-studies.html">More Work</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="../../assets/logo-footer.png" alt="AeroVista Analytics">
+            <p>Independent data &amp; analytics consulting — turning complex data into decisions leaders can trust.</p>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <a href="../../case-studies.html">Work</a>
+            <a href="../../services.html">Capabilities</a>
+            <a href="../../about.html">About</a>
+            <a href="../../resume.html">Résumé</a>
+          </div>
+          <div>
+            <h2>Capabilities</h2>
+            <a href="../../services.html">Data Analytics</a>
+            <a href="../../services.html">Business Intelligence</a>
+            <a href="../../services.html">Data Quality</a>
+            <a href="../../services.html">Analytics Consulting</a>
+          </div>
+          <div class="footer-connect">
+            <h2>Connect</h2>
+            <a href="mailto:contact@aerovistaanalytics.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4V6Z"></path><path d="m4 7 8 6 8-6"></path></svg>contact@aerovistaanalytics.com</a>
+            <a href="https://www.linkedin.com/in/andrew-kemp" rel="me noopener"><span class="linkedin" aria-hidden="true">in</span>LinkedIn</a>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12A7 7 0 0 0 5 9c0 5.8 7 12 7 12Z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Leesburg, VA · DC / DMV</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 AeroVista Analytics, LLC. All rights reserved.</p>
+          <div>
+            <a href="../../resources/member-data-readiness-kit">Resources</a>
+            <a href="../../privacy.html">Privacy</a>
+            <a href="../../terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../script.js?v=20260901v2"></script>
+  </body>
+</html>

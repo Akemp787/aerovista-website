@@ -1,3 +1,14 @@
+document.querySelectorAll("[data-print]").forEach((button) => {
+  button.addEventListener("click", () => window.print());
+});
+
+// Horizontal-bar chart widths (set via CSSOM — CSP style-src 'self' allows this,
+// inline style attributes would not).
+document.querySelectorAll(".hbar .fill[data-w]").forEach((el) => {
+  const w = parseFloat(el.getAttribute("data-w"));
+  if (!Number.isNaN(w)) el.style.width = Math.max(0, Math.min(100, w)) + "%";
+});
+
 const header = document.querySelector(".site-header");
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
@@ -108,20 +119,24 @@ document.querySelectorAll(".service-request").forEach((link) => {
 
 const params = new URLSearchParams(window.location.search);
 const requestedService = params.get("service");
-const requestedType = params.get("request");
+const requestedReason = params.get("reason") || params.get("request");
 const serviceSelect = document.querySelector('#inquiry-form select[name="service"]');
+const reasonField = document.querySelector('#inquiry-form [name="requestType"]');
 
-if (serviceSelect && requestedService) {
-  const matchingOption = Array.from(serviceSelect.options).find((option) => option.value === requestedService);
-  if (matchingOption) {
-    serviceSelect.value = requestedService;
-  }
+function setSelectValue(select, value) {
+  if (!select || !value) return;
+  const match = Array.from(select.options).find((option) => option.value === value);
+  if (match) select.value = value;
 }
 
-if (requestedType) {
-  const matchingRequest = document.querySelector(`#inquiry-form input[name="requestType"][value="${CSS.escape(requestedType)}"]`);
-  if (matchingRequest) {
-    matchingRequest.checked = true;
+setSelectValue(serviceSelect, requestedService);
+
+if (reasonField && requestedReason) {
+  if (reasonField.tagName === "SELECT") {
+    setSelectValue(reasonField, requestedReason);
+  } else {
+    const radio = document.querySelector(`#inquiry-form input[name="requestType"][value="${CSS.escape(requestedReason)}"]`);
+    if (radio) radio.checked = true;
   }
 }
 

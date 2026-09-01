@@ -3,192 +3,202 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NAFI Membership Data Migration Case Study | AeroVista Analytics</title>
-    <meta name="description" content="AeroVista Analytics case study: membership data migration, system coordination, cleanup, reconciliation, QA, analytics, and executive reporting support for the National Association of Flight Instructors.">
-    <link rel="canonical" href="https://aerovistaanalytics.com/case-studies/nafi-membership-data-migration">
-    <meta name="theme-color" content="#061a42">
+    <title>NAFI Membership Data Transformation Case Study | AeroVista Analytics</title>
+    <meta name="description" content="As lead data consultant to the CEO, Andrew Kemp reconciled hundreds of source files across 16,500+ member profiles, challenged a reported ~8,000 active-member figure, and identified ~6,000 verified payers for the National Association of Flight Instructors.">
+    <link rel="canonical" href="https://aerovistaanalytics.com/case-studies/nafi-membership-data-migration/">
+    <meta name="theme-color" content="#071528">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="AeroVista Analytics">
-    <meta property="og:title" content="Membership Data Migration &amp; Analytics Support for the National Association of Flight Instructors">
-    <meta property="og:description" content="How AeroVista Analytics executed a Tovuti to Member365 migration, reconciled mislabeled active members, and migrated 50+ spreadsheets of membership data.">
-    <meta property="og:url" content="https://aerovistaanalytics.com/case-studies/nafi-membership-data-migration">
+    <meta property="og:title" content="NAFI Membership Data Transformation | AeroVista Analytics">
+    <meta property="og:description" content="Reconciling 16,500+ member profiles and challenging a reported active-member count to give leadership a defensible number.">
+    <meta property="og:url" content="https://aerovistaanalytics.com/case-studies/nafi-membership-data-migration/">
     <meta property="og:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="NAFI Membership Data Migration Case Study">
-    <meta name="twitter:description" content="Membership migration, system coordination, active/lapsed status reconciliation, post-migration QA, analytics, and executive reporting support.">
+    <meta name="twitter:title" content="NAFI Membership Data Transformation">
+    <meta name="twitter:description" content="Reconciliation, identity resolution, and a defensible membership count for a national association.">
     <meta name="twitter:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
     <link rel="icon" href="../../assets/favicon.png" type="image/png">
     <link rel="manifest" href="../../site.webmanifest">
-    <link rel="stylesheet" href="../../styles.css?v=20260714-aero-teaser">
+    <link rel="stylesheet" href="../../styles.css?v=20260901v2">
   </head>
-  <body class="render-page">
+  <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="AeroVista Analytics home"><img src="../../assets/aerovista-logo-exact-light.png" alt="AeroVista Analytics"></a>
+        <a class="brand" href="../../index.html" aria-label="AeroVista Analytics home"><img src="../../assets/logo-header.png" alt="AeroVista Analytics"></a>
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
-        <nav class="site-nav" id="site-nav" aria-label="Primary navigation"><a href="../../services.html">Services</a><a href="../../plans.html">Solutions</a><a href="../../process.html">Our Approach</a><a href="../../aero.html">Aero</a><a class="active" href="../../case-studies.html">Case Studies</a><a href="../../about.html">About Us</a></nav>
-        <a class="header-cta" href="../../contact.html?service=Data%20Trust%20Audits">Book a Consultation</a>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation"><a href="../../index.html">Home</a><a class="active" href="../../case-studies.html">Work</a><a href="../../services.html">Capabilities</a><a href="../../about.html">About</a><a class="nav-cta" href="../../contact.html">Contact</a></nav>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="page-hero case-study-hero">
-        <div class="container page-hero-inner">
-          <p>Client Case Study</p>
-          <h1>Membership Data Migration &amp; Analytics Support for the National Association of Flight Instructors</h1>
-          <a class="btn btn-primary" href="../../contact.html?service=Data%20Trust%20Audits">Book a Consultation <span aria-hidden="true">-&gt;</span></a>
+      <section class="page-hero">
+        <div class="container">
+          <p class="breadcrumb"><a href="../../case-studies.html">Work</a> · NAFI Data Transformation</p>
+          <p class="eyebrow">Case Study · Membership / Nonprofit</p>
+          <h1>A defensible answer to a simple question: how many members do we really have?</h1>
+          <p>As lead data consultant to the CEO of a national association, I turned hundreds of fragmented source files into a reconciled, trustworthy view of the membership — and corrected a headline number leadership had been planning around.</p>
+          <div class="cs-meta-row">
+            <div><span>Client</span><strong>National Association of Flight Instructors</strong></div>
+            <div><span>Role</span><strong>Lead Data &amp; Migration Consultant (to the CEO)</strong></div>
+            <div><span>Scope</span><strong>16,500+ member profiles</strong></div>
+            <div><span>Stack</span><strong>Python · pandas · Excel</strong></div>
+          </div>
         </div>
       </section>
 
-      <section class="section case-study-section">
-        <div class="container case-study-layout">
-          <aside class="case-study-sidebar" aria-label="Case study summary">
-            <div class="case-study-facts">
-              <p><span>Client</span>National Association of Flight Instructors</p>
-              <p><span>Project Type</span>Membership data migration, system coordination, cleanup, reconciliation, QA, analytics, and executive reporting support</p>
-              <p><span>Systems</span>Tovuti, Member365, Stripe, 50+ spreadsheets, supporting exports, and membership templates</p>
+      <section class="section">
+        <div class="container cs-layout">
+          <aside class="cs-sidebar" aria-label="Case study summary">
+            <div class="cs-facts">
+              <p><span>Client</span>National Association of Flight Instructors (NAFI)</p>
+              <p><span>Systems</span>Tovuti, Member365, Stripe, hundreds of CSV/Excel exports</p>
+              <p><span>Oversight</span>Primary data lead to the CEO, with Board-level visibility</p>
             </div>
-            <div class="case-study-metrics">
-              <div><strong>50+</strong><span>Spreadsheets migrated</span></div>
-              <div><strong>16,500+</strong><span>Members and related information</span></div>
-              <div><strong>30,000+</strong><span>Records in individual source files</span></div>
+            <div class="cs-metrics">
+              <div><strong>16,500+</strong><span>member profiles</span></div>
+              <div><strong>Hundreds</strong><span>of CSV/Excel source files</span></div>
+              <div><strong>~8,000 → ~6,000</strong><span>reported vs. verified active payers</span></div>
             </div>
+            <nav class="cs-toc" aria-label="On this page">
+              <a href="#overview">Overview</a>
+              <a href="#challenge">The Challenge</a>
+              <a href="#role">My Role</a>
+              <a href="#approach">Approach</a>
+              <a href="#findings">Key Findings</a>
+              <a href="#impact">Business Impact</a>
+              <a href="#tools">Tools &amp; Methods</a>
+            </nav>
           </aside>
 
-          <article class="case-study-content">
-            <section>
+          <article class="cs-content">
+            <section id="overview">
               <p class="section-kicker">Overview</p>
-              <h2>Helping leadership move through a complex membership system transition with clearer, more reliable data.</h2>
-              <p>
-                The National Association of Flight Instructors needed execution support during a major transition from Tovuti to Member365.
-                The organization had 50+ spreadsheets and data exports covering 16,500+ members and their corresponding information,
-                including user records, subscription records, transaction history, coursework, Stripe payment information, and
-                membership templates. Some individual source spreadsheets exceeded 30,000 records.
-              </p>
-              <p>
-                AeroVista Analytics coordinated with the new system teams, cleaned and reconciled the source data, migrated the
-                information into the new system, and performed quality assurance after migration so leadership could make confident
-                decisions throughout the transition.
-              </p>
+              <h2>Fragmented systems, one number leadership couldn't trust.</h2>
+              <p>The National Association of Flight Instructors was moving between membership platforms (Tovuti to Member365) and, in the process, needed something more fundamental than a data move: a version of its membership it could actually believe. Records lived across hundreds of CSV and Excel exports covering 16,500+ member profiles — user records, subscriptions, transactions, coursework, and Stripe payments — and the systems didn't agree with one another.</p>
+              <p>I served as the primary data lead to the CEO, with Board-level visibility, responsible for turning that fragmented picture into reconciled, decision-ready information.</p>
             </section>
 
-            <section>
+            <section id="challenge">
               <p class="section-kicker">The Challenge</p>
-              <h2>Several systems, many record types, and high-stakes classification decisions.</h2>
-              <p>
-                NAFI's membership data included active members, lapsed members, lifetime members, organization members,
-                auto-renewing subscriptions, transaction history, course records, and contact tags. Because the data came from
-                several systems, inconsistencies appeared across records, including duplicate emails, missing renewal dates,
-                conflicting membership statuses, incomplete payment histories, and members who appeared in one system but not another.
-              </p>
-              <p>
-                During the data preparation and audit process, AeroVista identified that the previous system had labeled some
-                members as active even though subscription end dates and transaction history showed they were inactive or lapsed.
-                That issue had to be reconciled before the migrated data could support an accurate count of true membership.
-              </p>
-              <p>
-                The organization needed a reliable way to determine which records should be imported, how members should be
-                classified, and where additional review was required before launch.
-              </p>
+              <h2>A reported ~8,000 active members that the evidence didn't support.</h2>
+              <p>Leadership had been operating on a reported figure of roughly 8,000 active members. But "active" in the source system was a status label — not proof of a current, paid membership. Subscription end dates and transaction history frequently told a different story: members marked active whose payments had lapsed, duplicate identities inflating counts, conflicting identifiers across systems, and missing renewal or payment fields.</p>
+              <p>For an association, that number isn't cosmetic. It drives revenue expectations, budgeting, and how leadership represents the organization. A count that can't be defended is a decision waiting to go wrong.</p>
             </section>
 
-            <section>
-              <p class="section-kicker">AeroVista's Role</p>
-              <h2>Migration coordination, data migration, reconciliation, reporting, and post-migration quality assurance.</h2>
-              <div class="case-study-checkgrid">
-                <span>Consolidated, reviewed, and migrated data from 50+ spreadsheets and supporting exports.</span>
-                <span>Coordinated with the new system teams during the Tovuti to Member365 migration process.</span>
-                <span>Worked with data covering 16,500+ members and corresponding transaction, coursework, subscription, payment, and membership information.</span>
-                <span>Handled individual source spreadsheets with more than 30,000 records.</span>
-                <span>Cleaned and prepared membership import templates for Member365.</span>
-                <span>Reconciled user, subscription, transaction, course, and payment data.</span>
-                <span>Discovered active member mislabels by reconciling subscription end dates with transaction history.</span>
-                <span>Identified duplicate, missing, mismatched, and incomplete member records.</span>
-                <span>Validated active versus lapsed member classification.</span>
-                <span>Performed quality assurance after migration to review migrated records and identify issues requiring follow-up.</span>
-                <span>Created organized spreadsheets and reports for leadership review.</span>
-                <span>Investigated individual member records when payment or membership status needed verification.</span>
-                <span>Communicated findings clearly for executive and Board-level decision-making.</span>
+            <section id="role">
+              <p class="section-kicker">My Role</p>
+              <h2>Owning the data from raw exports to a number leadership could stand behind.</h2>
+              <ul>
+                <li>Served as <strong>primary data lead to the CEO</strong>, translating a technical reconciliation into executive-level findings and recommendations.</li>
+                <li>Consolidated <strong>hundreds of CSV and Excel source files</strong> across users, subscriptions, transactions, coursework, and Stripe payments.</li>
+                <li>Engineered <strong>identity-matching and source-of-truth controls</strong> to resolve duplicates, conflicting identifiers, and payment discrepancies.</li>
+                <li>Investigated the active-member discrepancy and produced a <strong>defensible, evidence-backed count</strong>.</li>
+                <li>Prepared reconciled data for migration and performed post-migration quality assurance.</li>
+              </ul>
+            </section>
+
+            <section id="approach">
+              <p class="section-kicker">Approach</p>
+              <h2>Reconcile identity first, then let evidence define "active."</h2>
+              <p>Rather than trust any single system's status field, I rebuilt the membership picture from evidence:</p>
+              <ul>
+                <li><strong>Unified identity.</strong> Matched members across systems on email, member number, and other identifiers to collapse duplicates and link records that belonged to the same person.</li>
+                <li><strong>Established a source of truth.</strong> Defined which system won for each field when they conflicted, and documented the rule so the logic was reviewable.</li>
+                <li><strong>Redefined "active" by evidence.</strong> Treated a member as verifiably active only when subscription dates and transaction/payment history actually supported it — not merely because a status column said so.</li>
+                <li><strong>Reconciled and validated.</strong> Cross-checked subscriptions against Stripe transactions to surface lapsed-but-labeled-active members, missing payments, and gaps needing review.</li>
+                <li><strong>Documented everything</strong> so leadership could see not just the number, but why it was the number.</li>
+              </ul>
+            </section>
+
+            <section id="findings">
+              <p class="section-kicker">Key Findings</p>
+              <h2>The real base of verified payers was materially smaller.</h2>
+              <div class="findings">
+                <div class="finding"><span class="fnum">1</span><div><h3>The active count was overstated</h3><p>Against a reported ~<span class="stat">8,000</span> active members, roughly <span class="stat">6,000</span> could be verified as recent payers on the evidence — a material gap with direct budget implications.</p></div></div>
+                <div class="finding"><span class="fnum">2</span><div><h3>Status labels masked lapsed members</h3><p>Members appeared active in one system while subscription end dates and transaction history showed they were lapsed or inactive.</p></div></div>
+                <div class="finding"><span class="fnum">3</span><div><h3>Duplicates and conflicts inflated the picture</h3><p>Duplicate emails, conflicting identifiers, and incomplete payment histories distorted counts until identity was resolved across sources.</p></div></div>
+                <div class="finding"><span class="fnum">4</span><div><h3>The data became migration-ready</h3><p>Reconciled, deduplicated records with documented source-of-truth logic could move into the new platform with confidence and post-migration QA.</p></div></div>
               </div>
             </section>
 
-            <section>
-              <p class="section-kicker">Tools &amp; Methods</p>
-              <h2>Practical analytics methods focused on reliable migration decisions.</h2>
-              <div class="tool-pills" aria-label="Tools and methods">
-                <span>Excel</span>
-                <span>Python/pandas</span>
-                <span>Data reconciliation</span>
-                <span>Record matching</span>
-                <span>System coordination</span>
-                <span>Membership status validation</span>
-                <span>Subscription end date analysis</span>
-                <span>Transaction history review</span>
-                <span>Post-migration QA</span>
-                <span>Import template preparation</span>
-                <span>Data quality review</span>
-                <span>Executive reporting support</span>
-              </div>
-            </section>
-
-            <section class="case-study-impact-card">
-              <p class="section-kicker">Outcome</p>
-              <h2>Thousands of member records migrated and reviewed through post-migration QA.</h2>
-              <p>
-                AeroVista Analytics migrated NAFI's data into Member365 and validated the results after migration.
-                The project corrected visibility into true active membership, renewal information, duplicate records, lapsed members,
-                and data gaps that needed attention before and after launch.
-              </p>
-              <p>
-                After the migration and QA process, leadership had migrated member data in the new system and a more accurate count
-                of true membership based on reconciled subscription and transaction evidence.
-              </p>
-            </section>
-
-            <section>
+            <section id="impact">
               <p class="section-kicker">Business Impact</p>
-              <h2>Turning scattered operational data into decision-ready information.</h2>
-              <p>
-                Through this project, AeroVista Analytics helped turn scattered operational data into structured, reviewable, and
-                decision-ready information. The work advanced a critical system migration while also creating a stronger foundation
-                for future membership reporting, renewal tracking, and revenue analysis.
-              </p>
-              <p>
-                For membership-based organizations, stronger data visibility means clearer insight into active members, lapsed members,
-                renewals, payment history, and data quality issues that can directly affect operations, revenue, and leadership decisions.
-              </p>
+              <h2>From a number nobody could defend to one leadership could act on.</h2>
+              <p>The engagement gave NAFI's leadership a defensible basis for decisions during a high-stakes platform transition. Instead of planning around an inflated status-based count, they had an evidence-backed view of true, paying membership — plus a documented, repeatable method for maintaining it.</p>
+              <div class="cs-callout">
+                <p class="big">~6,000</p>
+                <p>verified recent payers established from the evidence, replacing a reported ~8,000 that the underlying data did not support.</p>
+              </div>
+              <p>Beyond the headline number, the work left the organization with cleaner data, resolved duplicates, and stronger foundations for renewal tracking, revenue analysis, and future reporting.</p>
             </section>
 
-            <aside class="case-study-note">
-              <strong>Confidentiality note:</strong>
-              This public case study summarizes the business problem, methods, and outcomes without sharing private member data,
-              payment details, internal emails, or sensitive operational records.
-            </aside>
+            <section id="tools">
+              <p class="section-kicker">Tools &amp; Methods</p>
+              <h2>How it was done.</h2>
+              <div class="tool-pills">
+                <span>Python</span><span>pandas</span><span>Excel</span><span>Identity resolution</span><span>Record matching</span><span>Multi-source reconciliation</span><span>Source-of-truth controls</span><span>Subscription &amp; payment analysis</span><span>Data-quality investigation</span><span>Post-migration QA</span><span>Executive reporting</span>
+              </div>
+              <p class="cs-note"><strong>Confidentiality note:</strong> This public summary describes the business problem, methods, and outcomes only. It contains no private member data, payment details, or sensitive operational records.</p>
+            </section>
           </article>
         </div>
       </section>
 
-      <section class="cta-band">
+      <section class="section cta-band">
         <div class="container cta-inner">
-          <span class="calendar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48"><rect x="7" y="10" width="34" height="31" rx="2"></rect><path d="M15 5v10"></path><path d="M33 5v10"></path><path d="M7 20h34"></path><path d="M15 28h4"></path><path d="M23 28h4"></path><path d="M31 28h4"></path><path d="M15 35h4"></path><path d="M23 35h4"></path></svg>
-          </span>
           <div>
-            <h2>Preparing for a migration, cleanup, or reporting initiative?</h2>
-            <p>AeroVista helps organizations clean, reconcile, and trust operational data before major decisions.</p>
+            <p class="eyebrow">Messy data, high stakes?</p>
+            <h2>This is the kind of problem I solve.</h2>
+            <p>Reconciliation, data quality, and a number your leadership can actually defend.</p>
           </div>
-          <a class="btn btn-primary" href="../../contact.html?service=Data%20Trust%20Audits">Book a Consultation <span aria-hidden="true">-&gt;</span></a>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="../../contact.html?reason=Consulting%20Project">Discuss a Project</a>
+            <a class="btn btn-secondary btn-lg" href="../../case-studies.html">More Work</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer compact-footer">
-      <div class="container footer-bottom">
-        <p>&copy; 2026 AeroVista Analytics, LLC. All rights reserved.</p>
-        <div><a href="../../privacy.html">Privacy Policy</a><a href="../../terms.html">Terms of Service</a></div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="../../assets/logo-footer.png" alt="AeroVista Analytics">
+            <p>Independent data &amp; analytics consulting — turning complex data into decisions leaders can trust.</p>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <a href="../../case-studies.html">Work</a>
+            <a href="../../services.html">Capabilities</a>
+            <a href="../../about.html">About</a>
+            <a href="../../resume.html">Résumé</a>
+          </div>
+          <div>
+            <h2>Capabilities</h2>
+            <a href="../../services.html">Data Analytics</a>
+            <a href="../../services.html">Business Intelligence</a>
+            <a href="../../services.html">Data Quality</a>
+            <a href="../../services.html">Analytics Consulting</a>
+          </div>
+          <div class="footer-connect">
+            <h2>Connect</h2>
+            <a href="mailto:contact@aerovistaanalytics.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4V6Z"></path><path d="m4 7 8 6 8-6"></path></svg>contact@aerovistaanalytics.com</a>
+            <a href="https://www.linkedin.com/in/andrew-kemp" rel="me noopener"><span class="linkedin" aria-hidden="true">in</span>LinkedIn</a>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12A7 7 0 0 0 5 9c0 5.8 7 12 7 12Z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Leesburg, VA · DC / DMV</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 AeroVista Analytics, LLC. All rights reserved.</p>
+          <div>
+            <a href="../../resources/member-data-readiness-kit">Resources</a>
+            <a href="../../privacy.html">Privacy</a>
+            <a href="../../terms.html">Terms</a>
+          </div>
+        </div>
       </div>
     </footer>
-    <script src="../../script.js"></script>
+
+    <script src="../../script.js?v=20260901v2"></script>
   </body>
 </html>

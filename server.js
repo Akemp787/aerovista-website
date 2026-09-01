@@ -34,6 +34,12 @@ let lastRateLimitCleanup = Date.now();
 const csrfCookieSecure = PUBLIC_SITE_URL.startsWith("https://") ? "; Secure" : "";
 
 const allowedServices = new Set([
+  // Current capability areas
+  "Data Analytics & Decision Support",
+  "Business Intelligence & Visualization",
+  "Data Quality & Transformation",
+  "Analytics Consulting",
+  // Retained for backward compatibility with older links / resources
   "Data Trust Audits",
   "Migration Readiness",
   "Data Investigation",
@@ -53,7 +59,27 @@ const allowedServices = new Set([
   "Not sure yet",
 ]);
 
+// Reason for contacting (primary intent). Legacy values retained so older
+// cached forms and inbound links keep validating.
+const allowedRequestTypes = new Set([
+  "Consulting Project",
+  "Professional Opportunity",
+  "Collaboration",
+  "Other",
+  "Consultation",
+  "Quote",
+  "Project question",
+]);
+
 const allowedTimelines = new Set(["Flexible", "ASAP", "2-4 weeks", "1-3 months", "3+ months"]);
+
+// Pages retired in the 2026 portfolio redesign. 301 to the closest current page
+// so old links, bookmarks, and search results keep working.
+const permanentRedirects = new Map([
+  ["/plans.html", "/services.html"],
+  ["/process.html", "/services.html"],
+  ["/aero.html", "/case-studies.html"],
+]);
 
 const memberKitDeliveryFileOptions = [
   { filename: "Member_Data_Readiness_Kit.zip" },
@@ -296,10 +322,10 @@ function validateInquiry(payload) {
 
   const errors = [];
   if (inquiry.website) errors.push("Spam check failed.");
-  if (!["Consultation", "Quote", "Project question"].includes(inquiry.requestType)) errors.push("Choose a request type.");
+  if (!allowedRequestTypes.has(inquiry.requestType)) errors.push("Choose a reason for contacting.");
   if (inquiry.name.length < 2) errors.push("Enter your name.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiry.email)) errors.push("Enter a valid email address.");
-  if (!allowedServices.has(inquiry.service)) errors.push("Choose a valid service.");
+  if (inquiry.service && !allowedServices.has(inquiry.service)) errors.push("Choose a valid area of interest.");
   if (inquiry.timeline && !allowedTimelines.has(inquiry.timeline)) errors.push("Choose a valid timeline.");
   if (inquiry.message.length < 20) errors.push("Tell us a little more about the project.");
   if ((inquiry.message.match(/https?:\/\//gi) || []).length > 3) errors.push("Too many links in the message.");
@@ -977,6 +1003,12 @@ const server = http.createServer((req, res) => {
 
   if (req.method === "POST" && url.pathname === "/api/stripe/webhook") {
     handleStripeWebhook(req, res);
+    return;
+  }
+
+  if ((req.method === "GET" || req.method === "HEAD") && permanentRedirects.has(url.pathname)) {
+    res.writeHead(301, { ...securityHeaders(), Location: permanentRedirects.get(url.pathname), "Cache-Control": "no-store" });
+    res.end();
     return;
   }
 

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loudoun County Economic Growth Study | AeroVista Analytics</title>
+    <meta name="description" content="An economic and demographic growth study of Loudoun County, VA — integrating Census, BLS, and BEA data with Python, SQL, and AWS to analyze population, employment, income, housing, affordability, and peer comparisons.">
+    <link rel="canonical" href="https://aerovistaanalytics.com/case-studies/loudoun-county-growth-study/">
+    <meta name="theme-color" content="#071528">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AeroVista Analytics">
+    <meta property="og:title" content="Loudoun County Economic Growth Study | AeroVista Analytics">
+    <meta property="og:description" content="Integrating federal economic and demographic data into one model to analyze regional growth and affordability.">
+    <meta property="og:url" content="https://aerovistaanalytics.com/case-studies/loudoun-county-growth-study/">
+    <meta property="og:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Loudoun County Economic Growth Study">
+    <meta name="twitter:description" content="Integrating Census, BLS, and BEA data to analyze regional economic growth.">
+    <meta name="twitter:image" content="https://aerovistaanalytics.com/assets/aerovista-social-card.png">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link rel="stylesheet" href="../../styles.css?v=20260901v2">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="AeroVista Analytics home"><img src="../../assets/logo-header.png" alt="AeroVista Analytics"></a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation"><a href="../../index.html">Home</a><a class="active" href="../../case-studies.html">Work</a><a href="../../services.html">Capabilities</a><a href="../../about.html">About</a><a class="nav-cta" href="../../contact.html">Contact</a></nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-hero">
+        <div class="container">
+          <p class="breadcrumb"><a href="../../case-studies.html">Work</a> · Loudoun County Growth Study</p>
+          <p class="eyebrow">Case Study · Economic / Demographic</p>
+          <h1>What does one county's growth story look like when the data is put in one place?</h1>
+          <p>An independent study integrating multiple federal data sources into a single analytical model to understand population, employment, income, housing, and affordability in Loudoun County, VA — in context against its peers.</p>
+          <div class="cs-meta-row">
+            <div><span>Subject</span><strong>Loudoun County, Virginia</strong></div>
+            <div><span>Role</span><strong>Independent analysis — end to end</strong></div>
+            <div><span>Data</span><strong>Census · BLS · BEA</strong></div>
+            <div><span>Stack</span><strong>Python · SQL · AWS</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container cs-layout">
+          <aside class="cs-sidebar" aria-label="Case study summary">
+            <div class="cs-facts">
+              <p><span>Subject</span>Regional economic &amp; demographic growth</p>
+              <p><span>Sources</span>U.S. Census, Bureau of Labor Statistics, Bureau of Economic Analysis</p>
+              <p><span>Methods</span>Data integration, statistics, forecasting, peer benchmarking</p>
+            </div>
+            <div class="cs-metrics">
+              <div><strong>4+</strong><span>federal data sources integrated</span></div>
+              <div><strong>6</strong><span>growth dimensions analyzed</span></div>
+              <div><strong>Peer</strong><span>county benchmarking</span></div>
+            </div>
+            <nav class="cs-toc" aria-label="On this page">
+              <a href="#overview">Overview</a>
+              <a href="#challenge">The Challenge</a>
+              <a href="#questions">Questions</a>
+              <a href="#approach">Approach</a>
+              <a href="#analysis">Analysis</a>
+              <a href="#findings">Findings</a>
+              <a href="#tools">Tools &amp; Methods</a>
+            </nav>
+          </aside>
+
+          <article class="cs-content">
+            <section id="overview">
+              <p class="section-kicker">Overview</p>
+              <h2>Growth is a story told across many datasets.</h2>
+              <p>Understanding how a region is really changing means looking past any single indicator. Population, jobs, income, housing, and affordability each live in different federal datasets, measured differently and released on different schedules. On their own, each tells a partial story; together, they reveal whether growth is broad-based and sustainable — or uneven.</p>
+              <p>This independent study brought those sources into one model for Loudoun County, Virginia, and benchmarked the county against relevant peers so the numbers had context.</p>
+            </section>
+
+            <section id="challenge">
+              <p class="section-kicker">The Challenge</p>
+              <h2>Different sources, different shapes, one coherent picture.</h2>
+              <p>The core difficulty was integration. Census, BLS, and BEA data arrive with different geographies, time granularities, units, and revision cycles. Joining them into a single, trustworthy analytical model — without introducing mismatches or double-counting — was the prerequisite for any credible finding.</p>
+            </section>
+
+            <section id="questions">
+              <p class="section-kicker">Questions</p>
+              <h2>What the study set out to answer.</h2>
+              <ul class="q-list">
+                <li>How have population, employment, and income moved together over time?</li>
+                <li>Is housing supply and affordability keeping pace with economic growth?</li>
+                <li>How does the county compare with peer counties on the same measures?</li>
+                <li>What do recent trends imply for the near-term trajectory?</li>
+              </ul>
+            </section>
+
+            <section id="approach">
+              <p class="section-kicker">Approach</p>
+              <h2>Integrate, model, benchmark, project.</h2>
+              <ul>
+                <li>Ingested and normalized data from <strong>Census, BLS, and BEA</strong>, aligning geographies, units, and time periods.</li>
+                <li>Built an integrated analytical model in <strong>Python and SQL</strong>, with cloud storage on <strong>AWS</strong>.</li>
+                <li>Applied <strong>statistical analysis and forecasting</strong> to identify trends and project near-term direction.</li>
+                <li>Benchmarked Loudoun against <strong>peer counties</strong> to separate local dynamics from regional ones.</li>
+                <li>Produced <strong>visualizations</strong> that make the multi-source story legible at a glance.</li>
+              </ul>
+            </section>
+
+            <section id="analysis">
+              <p class="section-kicker">Analysis</p>
+              <h2>Six dimensions, one model.</h2>
+              <p>The integrated model let each dimension be read against the others — for example, comparing income and employment growth against housing cost and supply to assess whether prosperity was translating into affordability.</p>
+              <div class="cap-grid">
+                <div class="cap-card"><h3>Population</h3><p>Growth, composition, and how the resident base is changing over time.</p></div>
+                <div class="cap-card"><h3>Employment</h3><p>Job growth and labor-market strength from BLS series.</p></div>
+                <div class="cap-card"><h3>Income</h3><p>Household and personal income trends from BEA and Census.</p></div>
+                <div class="cap-card"><h3>Housing &amp; Affordability</h3><p>Whether housing cost and supply keep pace with income and jobs.</p></div>
+              </div>
+            </section>
+
+            <section id="findings">
+              <p class="section-kicker">Findings</p>
+              <h2>Context changes the conclusion.</h2>
+              <div class="findings">
+                <div class="finding"><span class="fnum">1</span><div><h3>Integration made comparison possible</h3><p>Bringing Census, BLS, and BEA into one model allowed indicators to be read together rather than in isolation — the point of the exercise.</p></div></div>
+                <div class="finding"><span class="fnum">2</span><div><h3>Affordability is the pressure point</h3><p>Reading housing cost against income and employment growth surfaced affordability as the dimension most worth watching.</p></div></div>
+                <div class="finding"><span class="fnum">3</span><div><h3>Peers provide the real yardstick</h3><p>Benchmarking against comparable counties distinguished county-specific dynamics from broader regional trends.</p></div></div>
+              </div>
+              <p class="cs-note">This is an independent analytical study. It summarizes methodology and the shape of the findings; full figures and code are in the project repository.</p>
+            </section>
+
+            <section id="tools">
+              <p class="section-kicker">Tools &amp; Methods</p>
+              <h2>How it was built.</h2>
+              <div class="tool-pills">
+                <span>Python</span><span>SQL</span><span>AWS</span><span>Census / BLS / BEA data</span><span>Data integration</span><span>Statistical analysis</span><span>Forecasting</span><span>Peer benchmarking</span><span>Data visualization</span>
+              </div>
+              <p class="cs-note"><strong>Project repository:</strong> <a href="https://github.com/Akemp787/Loudoun_County_Growth_Study" rel="noopener">github.com/Akemp787/Loudoun_County_Growth_Study</a>.</p>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="section cta-band">
+        <div class="container cta-inner">
+          <div>
+            <p class="eyebrow">Data scattered across sources?</p>
+            <h2>I bring it into one trustworthy model.</h2>
+            <p>Integration, analysis, and visualization that turn many datasets into one clear story.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="../../contact.html?reason=Consulting%20Project">Discuss a Project</a>
+            <a class="btn btn-secondary btn-lg" href="../../case-studies.html">More Work</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="../../assets/logo-footer.png" alt="AeroVista Analytics">
+            <p>Independent data &amp; analytics consulting — turning complex data into decisions leaders can trust.</p>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <a href="../../case-studies.html">Work</a>
+            <a href="../../services.html">Capabilities</a>
+            <a href="../../about.html">About</a>
+            <a href="../../resume.html">Résumé</a>
+          </div>
+          <div>
+            <h2>Capabilities</h2>
+            <a href="../../services.html">Data Analytics</a>
+            <a href="../../services.html">Business Intelligence</a>
+            <a href="../../services.html">Data Quality</a>
+            <a href="../../services.html">Analytics Consulting</a>
+          </div>
+          <div class="footer-connect">
+            <h2>Connect</h2>
+            <a href="mailto:contact@aerovistaanalytics.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4V6Z"></path><path d="m4 7 8 6 8-6"></path></svg>contact@aerovistaanalytics.com</a>
+            <a href="https://www.linkedin.com/in/andrew-kemp" rel="me noopener"><span class="linkedin" aria-hidden="true">in</span>LinkedIn</a>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12A7 7 0 0 0 5 9c0 5.8 7 12 7 12Z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Leesburg, VA · DC / DMV</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 AeroVista Analytics, LLC. All rights reserved.</p>
+          <div>
+            <a href="../../resources/member-data-readiness-kit">Resources</a>
+            <a href="../../privacy.html">Privacy</a>
+            <a href="../../terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../script.js?v=20260901v2"></script>
+  </body>
+</html>
